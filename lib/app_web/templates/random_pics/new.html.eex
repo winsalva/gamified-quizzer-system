@@ -1,0 +1,9 @@
+<h2>Upload an Image</h1>
+<%= form_for @random_pic, Routes.random_pics_path(@conn, :create), [multipart: true], fn f -> %>
+
+<label>Select Image</label>
+<%= file_input f, :file %>
+<%= error_tag f, :file %>
+
+<%= submit "Upload" %>
+<% end %>

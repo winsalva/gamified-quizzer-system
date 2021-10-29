@@ -26,6 +26,11 @@ defmodule AppWeb.Endpoint do
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
+  plug Plug.Static,
+    at: "/random-pics",
+    from: App.RandomPicsUploads.uploads_dir(),
+    gzip: false
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
@@ -43,7 +48,7 @@ defmodule AppWeb.Endpoint do
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
   plug Plug.Parsers,
-    parsers: [:urlencoded, :multipart, :json],
+    parsers: [:urlencoded, {:multipart, length: 50_000_000}, :json],
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
 

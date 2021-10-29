@@ -50,6 +50,14 @@ defmodule AppWeb.Router do
     ]
   end
 
+
+  scope "/random-pics", AppWeb do
+    pipe_through :browser
+
+    resources "/uploads", RandomPicsController, only: [:new, :create, :index]
+  end
+  
+
   # Other scopes may use custom stacks.
   # scope "/api", AppWeb do
   #   pipe_through :api

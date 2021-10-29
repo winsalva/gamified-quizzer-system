@@ -1,0 +1,6 @@
+<h2>List Random Pics</h2>
+<%= if @random_pics != [] do %>
+<%= for pic <- @random_pics do %>
+    <img src=<%= "/random-pics/0-" <> pic.file %>/>
+    <% end %>
+    <% end %>

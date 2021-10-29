@@ -1,6 +1,8 @@
 defmodule AppWeb.Admin.PageController do
   use AppWeb, :controller
 
+  plug :ensure_logged_in_admin
+  
   alias App.Query.Admin
   
   def index(conn, _params) do
