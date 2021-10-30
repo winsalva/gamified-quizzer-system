@@ -2,5 +2,6 @@
 <%= if @random_pics != [] do %>
 <%= for pic <- @random_pics do %>
     <img src=<%= "/random-pics/0-" <> pic.file %>/>
+    <%= link "Download", to: Routes.random_pics_path(@conn, :show, pic.id) %>
     <% end %>
     <% end %>

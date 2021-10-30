@@ -31,4 +31,10 @@ defmodule AppWeb.RandomPicsController do
     random_pics = RandomPics.list_random_pics()
     render(conn, :index, random_pics: random_pics)
   end
+
+  def show(conn, %{"id" => id}) do
+    upload = RandomPics.get_random_pics(id)
+    local_path = App.RandomPicsUploads.local_path(0, upload.file)
+    send_download(conn, {:file, local_path}, file: upload.file)
+  end
 end
