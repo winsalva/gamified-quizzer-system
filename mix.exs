@@ -50,7 +50,8 @@ defmodule App.MixProject do
       {:timex, "> 0.0.0"},
       {:faker, "> 0.0.0"},
       {:money, "> 0.0.0"},
-      {:pbkdf2_elixir, "~> 1.4"}
+      {:pbkdf2_elixir, "~> 1.4"},
+      {:mogrify, "~> 0.9.1"}
     ]
   end
 

@@ -7,6 +7,24 @@
 # General application configuration
 use Mix.Config
 
+# Configure mogrify command
+config :mogrify, mogrify_command: [
+  path: "magick",
+  args: ["mogrify"]
+]
+
+# Configure convert command:
+config :mogrify, convert_command: [
+  path: "magick",
+  args: ["convert"]
+]
+
+# Configure identify command:
+config :mogrify, identify_command: [
+  path: "magick",
+  args: ["identify"]
+]
+
 config :app,
   ecto_repos: [App.Repo]
 

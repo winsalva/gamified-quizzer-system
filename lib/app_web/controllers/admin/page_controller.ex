@@ -64,7 +64,7 @@ defmodule AppWeb.Admin.PageController do
       conn
     else
       conn
-      |> redirect(to: Routes.page_path(@conn, :index))
+      |> redirect(to: Routes.page_path(conn, :index))
       |> halt()
     end
   end

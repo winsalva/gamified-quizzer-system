@@ -1,5 +1,5 @@
 defmodule App.RandomPicsUploads do
-
+  
   def uploads_dir do
     Application.get_env(:app, :uploads_dir)
   end
