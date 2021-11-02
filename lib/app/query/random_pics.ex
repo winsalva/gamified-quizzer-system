@@ -26,9 +26,9 @@ defmodule App.Query.RandomPics do
   def insert_random_pics(file, user_id, params) do
     Repo.transaction(fn ->
       with {:ok, upload} <- insert_random_pics(params),
-      _ <- Thumbnail.create_thumbnail(upload),
       :ok <- File.cp(file.path, RandomPicsUploads.local_path(user_id, file.filename)
              ) do
+	Thumbnail.create_thumbnail(upload)
         {:ok, upload}
       else
         {:error, reason} -> Repo.rollback(reason)
@@ -48,5 +48,14 @@ defmodule App.Query.RandomPics do
   """
   def get_random_pics(id) do
     Repo.get(RandomPics, id)
+  end
+
+  @doc """
+  Updates a random pic."
+  """
+  def update_random_pics(%RandomPics{} = upload, params) do
+    upload
+    |> RandomPics.changeset(params)
+    |> Repo.update()
   end
 end
