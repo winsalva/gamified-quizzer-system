@@ -13,7 +13,7 @@ defmodule App.Thumbnail do
 
   def mogrify_thumbnail(src_path, dst_path) do
     Mogrify.open(src_path)
-    |> Mogrify.resize_to_limit("300x300")
+    |> Mogrify.resize_to_fill("851x315")
     |> Mogrify.save(path: dst_path)
   end
 
