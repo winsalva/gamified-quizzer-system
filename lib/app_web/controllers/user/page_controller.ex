@@ -10,17 +10,17 @@ defmodule AppWeb.User.PageController do
 
   def create(conn, %{"user" => params}) do
     case User.insert_user(params) do
-      {:ok, _user} ->
+      {:ok, user} ->
         conn
-	|> redirect(to: Routes.user_page_path(conn, :index))
+	|> redirect(to: Routes.user_page_path(conn, :show, user.id))
       {:error, %Ecto.Changeset{} = user} ->
         conn
 	|> render("new.html", user: user)
     end
   end
 
-  def index(conn, _params) do
-    users = User.list_users
-    render(conn, "index.html", users: users)
+  def show(conn, %{"id" => id}) do
+    user = User.get_user(id)
+    render(conn, :show, user: user)
   end
 end

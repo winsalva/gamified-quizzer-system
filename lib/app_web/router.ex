@@ -29,15 +29,15 @@ defmodule AppWeb.Router do
     pipe_through :browser
 
     resources "/", PageController, only: [
-      :new, :create, :index
+      :new, :create, :show
     ]
   end
 
-  scope "/items", AppWeb do
+  scope "/videos", AppWeb.Video, as: :video do
     pipe_through :browser
 
     resources "/", PageController, only: [
-      :index
+      :index, :new, :create, :edit, :update
     ]
 
   end
@@ -45,17 +45,16 @@ defmodule AppWeb.Router do
   scope "/admins", AppWeb.Admin, as: :admin do
     pipe_through :browser
 
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+    delete "/logout", SessionController, :delete
+
     resources "/", PageController, only: [
       :index, :new, :create, :show, :edit, :update, :delete
     ]
+
   end
 
-
-  scope "/random-pics", AppWeb do
-    pipe_through :browser
-
-    resources "/uploads", RandomPicsController, only: [:new, :create, :index, :show]
-  end
   
 
   # Other scopes may use custom stacks.

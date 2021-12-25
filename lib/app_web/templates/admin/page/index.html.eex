@@ -12,5 +12,7 @@
     </tbody>
   </table>
   <% end %>
+
+  <%= link "Add New Video", to: Routes.video_page_path(@conn, :new) %>
 </div>
 

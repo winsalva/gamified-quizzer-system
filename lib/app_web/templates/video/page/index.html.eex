@@ -1,0 +1,28 @@
+<div class="sub-container">
+  <h1>Videos</h1>
+  <%= if @conn.assigns.current_admin do %>
+  <%= link "Add New Video", to: Routes.video_page_path(@conn, :new) %>
+  <% end %>
+  
+  <%= if @videos == [] do %>
+  <p>No videos yet</p>
+  <% else %>
+  <table>
+    <thead>
+      <tr>
+	<th>Title</th>
+	<th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for video <- @videos do %>
+	  <tr>
+	    <td><strong><%= video.title %></strong></td>
+	    <td><%= video.description %></td>
+	  </tr>
+	  <% end %>
+    </tbody>
+  </table>
+  <% end %>
+</div>
+

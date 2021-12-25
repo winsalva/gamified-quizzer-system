@@ -1,33 +1,33 @@
-defmodule App.Schema.Item do
+defmodule App.Schema.Video do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias App.Schema.User
+  alias App.Schema.Admin
   
-  schema "items" do
-    belongs_to :user, User
+  schema "videos" do
+    belongs_to :admin, Admin
     field :title, :string
     field :description, :string
-    timestamps(type: :utc_datetime_usec)
+    timestamps()
   end
 
   @allowed_fields [
-    :user_id,
+    :admin_id,
     :title,
     :description
   ]
 
   @required_fields [
-    :user_id,
+    :admin_id,
     :title,
     :description
   ]
 
   @doc false
-  def changeset(item, params \\ %{}) do
-    item
+  def changeset(video, params \\ %{}) do
+    video
     |> cast(params, @allowed_fields)
     |> validate_required(@required_fields)
-    |> assoc_constraint(:user)
+    |> assoc_constraint(:admin)
   end
 end

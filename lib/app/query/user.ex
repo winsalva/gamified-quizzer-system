@@ -2,6 +2,7 @@ defmodule App.Query.User do
   alias App.Repo
   alias App.Schema.User
 
+  import Ecto.Query, warn: false
 
   def new_user do
     %User{}
@@ -10,7 +11,7 @@ defmodule App.Query.User do
 
   def insert_user(params) do
     %User{}
-    |> User.changeset_with_password(params)
+    |> User.changeset(params)
     |> Repo.insert()
   end
 
@@ -31,5 +32,13 @@ defmodule App.Query.User do
     get_user(id)
     |> User.changeset(params)
     |> Repo.update()
+  end
+
+  def get_username_and_password(username, password) do
+    query =
+      from u in User,
+        where: u.username == ^username and u.password == ^password
+
+    Repo.one(query)
   end
 end

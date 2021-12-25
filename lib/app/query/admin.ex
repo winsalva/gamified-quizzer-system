@@ -37,4 +37,20 @@ defmodule App.Query.Admin do
     get_admin(id)
     |> Repo.delete()
   end
+
+  def get_admin_by(attr) do
+    Repo.get_by(Admin, attr)
+  end
+
+  @doc """
+  Get admin by email and password.
+  """
+  def get_admin_by_email_and_password(email, password) do
+    with admin when not is_nil(admin) <- get_admin_by(%{email: String.trim(email)}),
+         true <- App.Password.verify_pass(password, admin.hashed_password) do
+      admin
+    else
+      _ -> App.Password.no_user_verify()
+    end
+  end
 end

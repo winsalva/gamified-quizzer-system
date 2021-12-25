@@ -1,0 +1,16 @@
+<div class="sub-container">
+<h1>Admin Login</h1>
+<%= if get_flash(@conn, :error) do %>
+  <div class="alert alert-danger">
+    <p><%= get_flash(@conn, :error) %></p>
+  </div>
+<% end %>
+<%= form_for @conn, Routes.admin_session_path(@conn, :create), fn f -> %>
+<label>Email</label>
+<%= text_input f, :email, placeholder: "Enter email.." %>
+<label>Password</label>
+<%= password_input f, :password, placeholder: "Enter password.." %>
+<%= submit "Login" %>
+<% end %>
+
+</div>

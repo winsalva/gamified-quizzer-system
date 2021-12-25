@@ -1,1 +1,17 @@
-<h2>Login here</h2>
+<div class="sub-container">
+  <h2>Login here</h2>
+  <%= if get_flash(@conn, :error) do %>
+  <div class="alert alert-danger">
+    <p><%= get_flash(@conn, :error) %></p>
+  </div>
+<% end %>
+  <%= form_for @conn, "#", fn f -> %>
+  <label>Username</label>
+  <%= text_input f, :username %>
+  <label>Password</label>
+  <%= password_input f, :password %>
+
+  <%= submit "Log in" %>
+  <% end %>
+</div>
+

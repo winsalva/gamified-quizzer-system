@@ -3,14 +3,11 @@ defmodule App.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :first_name, :string
-      add :middle_name, :string
-      add :last_name, :string
-      add :email, :string
+      add :username, :string
+      add :password, :string, default: ""
       add :seen, :boolean, default: false
-      timestamps([type: :utc_datetime_usec])
+      add :subs_expire, :utc_datetime
+      timestamps()
     end
-
-    create unique_index(:users, [:email])
   end
 end

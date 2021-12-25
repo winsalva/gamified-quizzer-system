@@ -3,34 +3,23 @@ defmodule App.Schema.User do
   import Ecto.Changeset
 
   schema "users" do
-    has_many :items, App.Schema.Item
-    field :first_name, :string
-    field :middle_name, :string
-    field :last_name, :string
-    field :email, :string
-    field :password, :string, virtual: true
-    field :hashed_password, :string
+    field :username, :string
+    field :password, :string, default: ""
     field :seen, :boolean, default: false
-    timestamps([type: :utc_datetime_usec])
+    field :subs_expire, :utc_datetime
+    timestamps()
   end
 
 
   @allowed_fields [
-    :first_name,
-    :middle_name,
-    :last_name,
-    :email,
-    :hashed_password,
-    :seen
+    :username,
+    :password,
+    :seen,
+    :subs_expire
   ]
 
   @required_fields [
-    :first_name,
-    :middle_name,
-    :last_name,
-    :email,
-    :hashed_password,
-    :seen
+    :username
   ]
 
   @doc false
@@ -38,8 +27,6 @@ defmodule App.Schema.User do
     user
     |> cast(params, @allowed_fields)
     |> validate_required(@required_fields)
-    |> validate_format(:email, ~r/@/)
-    |> unique_constraint(:email)
   end
 
   @doc false
