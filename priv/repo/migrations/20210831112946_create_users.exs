@@ -6,7 +6,7 @@ defmodule App.Repo.Migrations.CreateUsers do
       add :username, :string
       add :password, :string, default: ""
       add :seen, :boolean, default: false
-      add :subs_expire, :utc_datetime
+      add :subs_expire, :utc_datetime_usec
       timestamps()
     end
   end

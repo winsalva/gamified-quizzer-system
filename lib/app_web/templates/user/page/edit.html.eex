@@ -1,0 +1,15 @@
+<div class="sub-container">
+  <h1>Edit User: <%= @user.data.username %></h1>
+  <%= form_for @user, Routes.user_page_path(@conn, :update, @user.data), fn f -> %>
+  <label>Password</label>
+  <%= text_input f, :password, placeholder: "Enter password for user.." %>
+  <label>Subscription Expiration</label>
+  <%= datetime_select f, :subs_expire, builder: fn b -> %>
+  Date: <%= b.(:day, []) %> / <%= b.(:month, []) %> / <%= b.(:year, []) %>
+  Time: <%= b.(:hour, []) %> : <%= b.(:minute, []) %> : <%= b.(:second, []) %>
+  <% end %>
+  
+  <%= submit "Save" %>
+  <% end %>
+</div>
+

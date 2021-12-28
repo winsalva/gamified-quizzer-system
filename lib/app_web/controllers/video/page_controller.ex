@@ -33,7 +33,7 @@ defmodule AppWeb.Video.PageController do
   end
 
   defp ensure_logged_in(conn, _options) do
-    if conn.assigns.current_user || conn.assigns.current_admin do
+    if conn.assigns.current_user && conn.assigns.current_user.subs_expire || conn.assigns.current_admin do
       conn
     else
       conn

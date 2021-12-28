@@ -7,11 +7,17 @@
 <% end %>
   <%= form_for @conn, "#", fn f -> %>
   <label>Username</label>
-  <%= text_input f, :username %>
+  <%= text_input f, :username, placeholder: "Enter username.." %>
   <label>Password</label>
-  <%= password_input f, :password %>
+  <%= password_input f, :password, placeholder: "Enter password.." %>
 
   <%= submit "Log in" %>
   <% end %>
+
+  <br>
+  <strong>
+    <a href="mailto:winsalva396@gmail.com">Send me email</a>
+  </strong> | <%= link "Register", to: Routes.user_page_path(@conn, :new) %>
+  
 </div>
 

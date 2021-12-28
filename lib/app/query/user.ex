@@ -4,6 +4,30 @@ defmodule App.Query.User do
 
   import Ecto.Query, warn: false
 
+  @doc """
+  Checks for pass expiration on users table periodically.
+  """
+  def check_pass_expire() do
+    utc_now = DateTime.utc_now
+    query =
+      from u in User,
+        where: not is_nil(u.subs_expire)
+
+    result = Repo.all(query)
+
+    if result == [] do
+      result
+    else
+      result
+      |> Enum.filter(fn x ->
+        if DateTime.compare(x.subs_expire, utc_now) == :lt do
+          x
+        end
+      end)
+      |> Enum.map(fn x -> update_user(x.id, %{subs_expire: nil, password: ""}) end)
+    end
+  end
+
   def new_user do
     %User{}
     |> User.changeset()
@@ -16,7 +40,11 @@ defmodule App.Query.User do
   end
 
   def list_users do
-    Repo.all(User)
+    query =
+      from u in User,
+        order_by: [desc: :updated_at]
+
+    Repo.all(query)
   end
 
   def get_user(id) do

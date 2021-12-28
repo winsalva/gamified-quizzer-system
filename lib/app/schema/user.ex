@@ -6,7 +6,7 @@ defmodule App.Schema.User do
     field :username, :string
     field :password, :string, default: ""
     field :seen, :boolean, default: false
-    field :subs_expire, :utc_datetime
+    field :subs_expire, :utc_datetime_usec
     timestamps()
   end
 

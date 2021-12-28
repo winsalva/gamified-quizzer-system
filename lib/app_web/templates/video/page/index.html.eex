@@ -1,7 +1,7 @@
 <div class="sub-container">
   <h1>Videos</h1>
   <%= if @conn.assigns.current_admin do %>
-  <%= link "Add New Video", to: Routes.video_page_path(@conn, :new) %>
+  <%= link "Add New Video", to: Routes.video_page_path(@conn, :new) %> | <%= link "Menu", to: Routes.admin_page_path(@conn, :index) %>
   <% end %>
   
   <%= if @videos == [] do %>
@@ -17,7 +17,7 @@
     <tbody>
       <%= for video <- @videos do %>
 	  <tr>
-	    <td><strong><%= video.title %></strong></td>
+	    <td><strong><%= link video.title, to: video.link %></strong></td>
 	    <td><%= video.description %></td>
 	  </tr>
 	  <% end %>

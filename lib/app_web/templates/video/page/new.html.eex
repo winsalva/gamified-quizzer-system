@@ -4,7 +4,9 @@
   <label>Title</label>
   <%= text_input f, :title, placeholder: "Video title.." %>
   <%= error_tag f, :title %>
-
+  <label>Link</label>
+  <%= text_input f, :link, placeholder: "Video link.." %>
+  <%= error_tag f, :link %>
   <label>Description</label>
   <%= textarea f, :description, placeholder: "Add video description.." %>
   <%= error_tag f, :description %>

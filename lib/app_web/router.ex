@@ -29,7 +29,7 @@ defmodule AppWeb.Router do
     pipe_through :browser
 
     resources "/", PageController, only: [
-      :new, :create, :show
+      :new, :create, :show, :index, :edit, :update
     ]
   end
 

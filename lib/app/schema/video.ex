@@ -7,6 +7,7 @@ defmodule App.Schema.Video do
   schema "videos" do
     belongs_to :admin, Admin
     field :title, :string
+    field :link, :string
     field :description, :string
     timestamps()
   end
@@ -14,12 +15,14 @@ defmodule App.Schema.Video do
   @allowed_fields [
     :admin_id,
     :title,
+    :link,
     :description
   ]
 
   @required_fields [
     :admin_id,
     :title,
+    :link,
     :description
   ]
 

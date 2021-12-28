@@ -12,4 +12,6 @@
 
 <%= submit "Register" %>
 <% end %>
+<br>
+<%= link "Log in", to: Routes.session_path(@conn, :new) %>
 </div>

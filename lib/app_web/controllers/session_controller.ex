@@ -14,12 +14,12 @@ defmodule AppWeb.SessionController do
       |> render("new.html")
     else
       case User.get_username_and_password(username, password) do
-        {:ok, user} ->
+        %App.Schema.User{} = user ->
 	  conn
 	  |> put_session(:user_id, user.id)
 	  |> put_session(:admin_id, nil)
 	  |> configure_session(renew: true)
-	  |> redirect(to: Routes.user_path(conn, :show, user.id))
+	  |> redirect(to: Routes.video_page_path(conn, :index))
 	nil ->
 	  conn
 	  |> put_flash(:error, "Username and password combination cannot be found!")

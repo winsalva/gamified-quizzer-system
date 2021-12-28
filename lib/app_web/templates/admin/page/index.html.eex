@@ -1,18 +1,9 @@
 <div class="sub-container">
-  <%= if @admins == [] do %>
-  <p>No admins yet.</p>
-  <% else %>
-  <table>
-    <tbody>
-      <%= for admin <- @admins do %>
-	  <tr>
-	    <td><%= admin.username %></td>
-	  </tr>
-	  <% end %>
-    </tbody>
-  </table>
-  <% end %>
+  <h1>Admin Dashboard</h1>
 
-  <%= link "Add New Video", to: Routes.video_page_path(@conn, :new) %>
+  <%= link "Add New Video", to: Routes.video_page_path(@conn, :new) %> |
+  <%= link "Videos", to: Routes.video_page_path(@conn, :index) %> |
+  <%= link "Users", to: Routes.user_page_path(@conn, :index) %>
+  
 </div>
 
