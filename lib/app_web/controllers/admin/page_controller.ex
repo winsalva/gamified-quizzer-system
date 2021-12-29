@@ -3,11 +3,20 @@ defmodule AppWeb.Admin.PageController do
 
   plug :ensure_logged_in_admin
   
-  alias App.Query.Admin
+  alias App.Query.{
+    Admin,
+    User,
+    Video
+  }
   
   def index(conn, _params) do
     admins = Admin.list_admins()
-    render(conn, :index, admins: admins)
+    users = User.list_users
+    videos = Video.list_videos
+    render(conn, :index,
+    admins: admins,
+    users: users,
+    videos: videos)
   end
 
   def new(conn, _params) do

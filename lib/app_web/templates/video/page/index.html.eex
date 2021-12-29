@@ -1,28 +1,35 @@
 <div class="sub-container">
-  <h1>Videos</h1>
-  <%= if @conn.assigns.current_admin do %>
-  <%= link "Add New Video", to: Routes.video_page_path(@conn, :new) %> | <%= link "Menu", to: Routes.admin_page_path(@conn, :index) %>
+  <br>
+  <h2 align="center"><strong>Videos</strong></h2>
+  <%= render(AppWeb.SharedView, "nav.html", conn: @conn) %>
+
+  <%= if get_flash(@conn, :error) do %>
+  <div class="alert alert-danger">
+    <p><%= get_flash(@conn, :error) %></p>
+  </div>
+  <% end %>
+  <%= if get_flash(@conn, :info) do %>
+  <div class="alert alert-info">
+    <p><%= get_flash(@conn, :info) %></p>
+  </div>
   <% end %>
   
   <%= if @videos == [] do %>
-  <p>No videos yet</p>
+  <p>No videos yet!</p>
   <% else %>
-  <table>
-    <thead>
-      <tr>
-	<th>Title</th>
-	<th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= for video <- @videos do %>
-	  <tr>
-	    <td><strong><%= link video.title, to: video.link %></strong></td>
-	    <td><%= video.description %></td>
-	  </tr>
-	  <% end %>
-    </tbody>
-  </table>
+  <div class="video-container">
+    <%= for video <- @videos do %>
+	<div class="v-container">
+	  <strong><%= link video.title, to: video.link, class: "v-title" %></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <%= if @conn.assigns.current_admin do %>
+            <span><%= link "Edit", to: Routes.video_page_path(@conn, :edit, video.id) %> | <%= link "Delete", to: Routes.video_page_path(@conn, :delete, video.id), method: :delete %></span>
+	    <% end %>
+	    
+	  <p><%= video.description %></p>
+	</div>
+	<% end %>
+  </div>
   <% end %>
+  <br>
 </div>
 

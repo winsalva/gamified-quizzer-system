@@ -1,0 +1,13 @@
+<div class="nav">
+    <%= link "Home", to: Routes.page_path(@conn, :index) %> |
+    <%= if @conn.assigns.current_user && @conn.assigns.current_user.subs_expire || @conn.assigns.current_admin do %>
+    <%= link "Videos", to: Routes.video_page_path(@conn, :index) %> |
+    <%= link "Log out", to: Routes.session_path(@conn, :delete), method: :delete, data: [confirm: "Are you sure?"] %>
+    <% else %>
+    <%= link "Log in", to: Routes.session_path(@conn, :new) %> |
+    <%= link "Register", to: Routes.user_page_path(@conn, :new) %>
+    <% end %>
+    <%= if @conn.assigns.current_admin do %>
+    | <%= link "Menu", to: Routes.admin_page_path(@conn, :index) %>
+    <% end %>
+  </div>

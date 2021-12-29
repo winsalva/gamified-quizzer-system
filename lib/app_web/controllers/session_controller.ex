@@ -27,4 +27,11 @@ defmodule AppWeb.SessionController do
       end
     end
   end
+
+  def delete(conn, _params) do
+    conn
+    |> clear_session()
+    |> configure_session(drop: true)
+    |> redirect(to: Routes.page_path(conn, :index))
+  end
 end

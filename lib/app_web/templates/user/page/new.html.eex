@@ -1,5 +1,8 @@
 <div class="sub-container">
-  <h1>Sign here</h1>
+  <br><br>
+  <h2 align="center"><strong>Register</strong></h2>
+  <%= render(AppWeb.SharedView, "nav.html", conn: @conn) %>
+  
   <%= if get_flash(@conn, :error) do %>
   <div class="alert alert-danger">
     <p><%= get_flash(@conn, :error) %></p>
@@ -12,6 +15,7 @@
 
 <%= submit "Register" %>
 <% end %>
-<br>
-<%= link "Log in", to: Routes.session_path(@conn, :new) %>
+  <div class="email-option">
+    <a href="mailto:winsalva396@gmail.com">Email Me</a>
+  </div>
 </div>

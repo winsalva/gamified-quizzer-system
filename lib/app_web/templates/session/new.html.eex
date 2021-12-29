@@ -1,10 +1,19 @@
 <div class="sub-container">
-  <h2>Login here</h2>
+  <br><br>
+  <h2 align="center"><strong>Log in</strong></h2>
+  <%= render(AppWeb.SharedView, "nav.html", conn: @conn) %>
+  
   <%= if get_flash(@conn, :error) do %>
   <div class="alert alert-danger">
     <p><%= get_flash(@conn, :error) %></p>
   </div>
-<% end %>
+  <% end %>
+  <%= if get_flash(@conn, :info) do %>
+  <div class="alert alert-info">
+    <p><%= get_flash(@conn, :info) %></p>
+  </div>
+  <% end %>
+  
   <%= form_for @conn, "#", fn f -> %>
   <label>Username</label>
   <%= text_input f, :username, placeholder: "Enter username.." %>
@@ -13,11 +22,8 @@
 
   <%= submit "Log in" %>
   <% end %>
-
-  <br>
-  <strong>
-    <a href="mailto:winsalva396@gmail.com">Send me email</a>
-  </strong> | <%= link "Register", to: Routes.user_page_path(@conn, :new) %>
-  
+  <div class="email-option">
+    <a href="mailto:winsalva396@gmail.com">Email Me</a>
+  </div>
 </div>
 

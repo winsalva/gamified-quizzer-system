@@ -37,6 +37,7 @@ defmodule AppWeb.User.PageController do
     case User.insert_user(params) do
       {:ok, user} ->
         conn
+	|> put_flash(:info, "Welcome #{user.username}. Your account was created successfully!")
 	|> redirect(to: Routes.session_path(conn, :new))
       {:error, %Ecto.Changeset{} = user} ->
         conn

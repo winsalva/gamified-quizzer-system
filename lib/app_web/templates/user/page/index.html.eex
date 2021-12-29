@@ -1,5 +1,7 @@
 <div class="sub-container">
-<h2>List Users</h2>
+  <br>
+  <h2 align="center"><b>List Users</b></h2>
+  <%= render(AppWeb.SharedView, "nav.html", conn: @conn) %>
 <%= if @users == [] do %>
 <p>No users yet.</p>
 <% else %>

@@ -1,9 +1,13 @@
 <div class="sub-container">
-  <h1>Admin Dashboard</h1>
+  <br>
+  <h2 align="center"><strong>Admin Dashboard</strong></h2>
+  <%= render(AppWeb.SharedView, "nav.html", conn: @conn) %>
 
-  <%= link "Add New Video", to: Routes.video_page_path(@conn, :new) %> |
-  <%= link "Videos", to: Routes.video_page_path(@conn, :index) %> |
-  <%= link "Users", to: Routes.user_page_path(@conn, :index) %>
-  
+  <div class="admin-options">
+    <%= link "New Video", to: Routes.video_page_path(@conn, :new) %> 
+    <%= link "Videos (#{length(@videos)})", to: Routes.video_page_path(@conn, :index) %>
+    <%= link "Users (#{length(@users)})", to: Routes.user_page_path(@conn, :index) %>
+  </div>
+  <br>
 </div>
 

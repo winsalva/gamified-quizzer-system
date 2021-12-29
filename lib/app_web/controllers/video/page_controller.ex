@@ -32,6 +32,36 @@ defmodule AppWeb.Video.PageController do
     end
   end
 
+  def edit(conn, %{"id" => id}) do
+    video = Video.edit_video(id)
+    render(conn, :edit, video: video)
+  end
+
+  def update(conn, %{"video" => params, "id" => id}) do
+    case Video.update_video(id, params) do
+      {:ok, _video} ->
+        conn
+	|> put_flash(:info, "Video was edited successfully!")
+	|> redirect(to: Routes.video_page_path(conn, :index))
+      {:error, %Ecto.Changeset{} = video} ->
+        conn
+	|> render(:edit, video: video)
+    end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    case Video.delete_video(id) do
+      {:ok, _} ->
+        conn
+	|> put_flash(:info, "A video was deleted successfully!")
+	|> redirect(to: Routes.video_page_path(conn, :index))
+      _ ->
+        conn
+	|> put_flash(:error, "Unable to delete!")
+	|> redirect(to: Routes.video_page_path(conn, :index))
+    end
+  end
+
   defp ensure_logged_in(conn, _options) do
     if conn.assigns.current_user && conn.assigns.current_user.subs_expire || conn.assigns.current_admin do
       conn

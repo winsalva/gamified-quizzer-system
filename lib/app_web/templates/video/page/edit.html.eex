@@ -1,7 +1,7 @@
 <div class="sub-container">
   <br>
-  <h2 align="center"><b>New Video</b></h2>
-  <%= form_for @video, Routes.video_page_path(@conn, :create), fn f -> %>
+  <h2 align="center"><b>Edit Video</b></h2>
+  <%= form_for @video, Routes.video_page_path(@conn, :update, @video.data), fn f -> %>
   <label>Title</label>
   <%= text_input f, :title, placeholder: "Video title.." %>
   <%= error_tag f, :title %>
@@ -12,7 +12,7 @@
   <%= textarea f, :description, placeholder: "Add video description.." %>
   <%= error_tag f, :description %>
 
-  <%= submit "Upload" %>
+  <%= submit "Save Changes" %>
   <% end %>
   <br>
 </div>
