@@ -46,7 +46,7 @@ defmodule AppWeb.StudentController do
       {:ok, student} ->
         conn
         |> put_flash(:info, "Student record updated successfully.")
-        |> redirect(to: Routes.student_path(conn, :show, student))
+        |> redirect(to: Routes.student_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", student: student, changeset: changeset)

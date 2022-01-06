@@ -7,7 +7,8 @@ defmodule AppWeb.QuizController do
 
   def quiz_result(conn, %{"id" => id}) do
     quizzes = QuizAndExam.list_student_quiz_records(id)
-    render(conn, "quiz-result.html", quizzes: quizzes)
+    student = School.get_student!(id)
+    render(conn, "quiz-result.html", quizzes: quizzes, student: student)
   end
 
   def search_student(conn, %{"lastname" => lastname}) do
@@ -37,7 +38,7 @@ defmodule AppWeb.QuizController do
       {:ok, quiz} ->
         conn
         |> put_flash(:info, "Quiz points for #{student.firstname} was added successfully.")
-        |> redirect(to: Routes.quiz_path(conn, :index))
+        |> redirect(to: Routes.student_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset, student: student)

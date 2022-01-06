@@ -8,6 +8,10 @@
   <table>
     <thead>
       <tr>
+      <th colspan="2">First name: <%= @student.firstname %></th>
+      <th colspan="4">Last name: <%= @student.lastname %></th>
+    </tr>
+      <tr>
 	<th>Quiz no.</th>
 	<th>Subject</th>
 	<th>Items</th>
