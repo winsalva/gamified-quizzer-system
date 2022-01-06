@@ -1,6 +1,24 @@
 <div class="sub-container">
 <h1 align="center">Listing Students</h1>
 
+<div class="school-nav">
+  <%= link "New Student", to: Routes.student_path(@conn, :new) %>
+  <%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %>
+</div>
+
+<br>
+<%= if get_flash(@conn, :info) do %>
+  <div class="alert alert-info">
+    <p><%= get_flash(@conn, :info) %></p>
+  </div>
+<% end %>
+
+<%= if get_flash(@conn, :error) do %>
+  <div class="alert alert-danger">
+    <p><%= get_flash(@conn, :error) %></p>
+  </div>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -17,15 +35,12 @@
       <td><%= student.lastname %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.student_path(@conn, :show, student) %></span>
-        <span><%= link "Edit", to: Routes.student_path(@conn, :edit, student) %></span>
-        <span><%= link "Delete", to: Routes.student_path(@conn, :delete, student), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span><%= link "Show", to: Routes.student_path(@conn, :show, student), class: "td-blue" %></span>
+        <span><%= link "Edit", to: Routes.student_path(@conn, :edit, student), class: "td-blue" %></span>
+        <span><%= link "Delete", to: Routes.student_path(@conn, :delete, student), method: :delete, class: "td-red", data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Student", to: Routes.student_path(@conn, :new) %></span>
-<span><%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %></span>
 </div>

@@ -1,5 +1,10 @@
 <div class="sub-container">
   <h1 align="center">Quiz Result</h1>
+  <div class="school-nav">
+    <%= link "List Students", to: Routes.student_path(@conn, :index) %>
+    <%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %>
+  </div>
+  <br>
   <table>
     <thead>
       <tr>
@@ -28,8 +33,4 @@
 	  <% end %>
     </tbody>
   </table>
-      
-
-  <br>
-  <%= link "View Users", to: Routes.student_path(@conn, :index) %>
 </div>

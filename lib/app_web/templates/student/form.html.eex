@@ -6,11 +6,11 @@
   <% end %>
 
   <%= label f, :firstname %>
-  <%= text_input f, :firstname %>
+  <%= text_input f, :firstname, placeholder: "Enter first name.." %>
   <%= error_tag f, :firstname %>
 
   <%= label f, :lastname %>
-  <%= text_input f, :lastname %>
+  <%= text_input f, :lastname, placeholder: "Enter last name.." %>
   <%= error_tag f, :lastname %>
 
   <div>

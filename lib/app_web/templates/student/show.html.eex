@@ -1,26 +1,27 @@
 <div class="sub-container">
-<h1 align="center">Student Record</h1>
-
-<ul>
-
-  <li>
-    <strong>Firstname:</strong>
-    <%= @student.firstname %>
-  </li>
-
-  <li>
-    <strong>Lastname:</strong>
-    <%= @student.lastname %>
-  </li>
-
-</ul>
-
-<h3>Quiz Records</h3>
+  <h1 align="center">Student Quiz Record</h1>
+  <div class="school-nav">
+    <%= link "List Students", to: Routes.student_path(@conn, :index) %>
+    <%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %>
+  </div>
+<br>
 <%= if @quizzes == [] do %>
-<p>No records yet.</p>
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">First name: <%= @student.firstname %></th>
+      <th colspan="2">Last name: <%= @student.lastname %></th>
+    </tr>
+  </thead>
+</table>
+<h3 align="center">No quiz records yet!</h3>
 <% else %>
 <table>
   <thead>
+    <tr>
+      <th colspan="2">First name: <%= @student.firstname %></th>
+      <th colspan="2">Last name: <%= @student.lastname %></th>
+    </tr>
     <tr>
       <th>Quiz no.</th>
       <th>Subject</th>
@@ -39,9 +40,6 @@
 	  <% end %>
     </tbody>
 </table>
-<%= link "Calculate", to: Routes.quiz_path(@conn, :quiz_result, @student.id) %>
+<%= link "Calculate", to: Routes.quiz_path(@conn, :quiz_result, @student.id), class: "calculate" %>
 <% end %>
-    
-
-<span><%= link "Back", to: Routes.student_path(@conn, :index) %></span>
 </div>

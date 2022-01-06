@@ -1,5 +1,10 @@
 <div class="sub-container">
-<h1 align="center">New Quiz Record</h1>
+  <h1 align="center">New Quiz Record</h1>
+  <div class="school-nav">
+    <%= link "List Students", to: Routes.student_path(@conn, :index) %>
+      <%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %>
+  </div>
+  <br>
 <h3>Quiz points for: <%= @student.firstname %> <%= @student.lastname %></h3>
 
 <%= form_for @changeset, Routes.quiz_path(@conn, :create, %{student_id: @student.id}), fn f -> %>
@@ -35,8 +40,6 @@
   </div>
 <% end %>
 <br>
-
-<span><%= link "Back", to: Routes.quiz_path(@conn, :index) %></span>
 <br>
 </div>
 

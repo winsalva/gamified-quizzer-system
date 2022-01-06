@@ -4,10 +4,51 @@
 .green {
     color: green;
 }
+.school-nav {
+    /*display: flex;*/
+    text-align: center;
+    align-items: center;
+}
+.school-nav a {
+    padding: .5rem 1.5rem;
+    background-color: #0069d9;
+    color: #fff;
+}
+.school-nav a:hover {
+    background-color: #606c76;
+    color: #fff;
+}
+.calculate {
+    padding: 1rem 2rem;
+    background-color: #f47721;
+    color: #fff;
+}
+.calculate:hover {
+    background-color: #606c76;
+    color: #fff;
+}
+.td-blue {
+    background-color: #0069d9;
+    color: #fff;
+    padding: .5rem 1rem;
+}
+.td-blue:hover {
+    background-color: #606c76;
+    color: #fff;
+}
+.td-red {
+    background-color: red;
+    color: #fff;
+    padding: .5rem 1rem;
+}
+.td-red:hover {
+    background-color: #606c76;
+    color: #fff;
+}
 .sub-container {
     margin: 0;
     padding: 0 1.5rem;
-    background-color: #000000;
+    background-color: #181818;
 }
 .options {
     display: flex;

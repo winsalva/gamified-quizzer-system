@@ -45,7 +45,7 @@ defmodule AppWeb.StudentController do
     case School.update_student(student, student_params) do
       {:ok, student} ->
         conn
-        |> put_flash(:info, "Student updated successfully.")
+        |> put_flash(:info, "Student record updated successfully.")
         |> redirect(to: Routes.student_path(conn, :show, student))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -58,7 +58,7 @@ defmodule AppWeb.StudentController do
     {:ok, _student} = School.delete_student(student)
 
     conn
-    |> put_flash(:info, "Student deleted successfully.")
+    |> put_flash(:info, "Student record was deleted successfully.")
     |> redirect(to: Routes.student_path(conn, :index))
   end
 end
