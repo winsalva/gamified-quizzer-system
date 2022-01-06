@@ -1,0 +1,41 @@
+<div class="sub-container">
+<h1 align="center">Quiz and Exam</h1>
+
+<%= form_for @conn, Routes.quiz_path(@conn, :search_student), fn f -> %>
+<%= text_input f, :lastname, placeholder: "Enter student lastname.." %>
+
+<%= submit "Search" %>
+<% end %>
+
+<%= case @query do %>
+  <% nil -> %>
+  <p></p>
+  <% [] -> %>
+  <p>No results found for: <em><b><%= @query_string %></b></em></p>
+  <% query -> %>
+  <table>
+  <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for student <- query do %>
+    <tr>
+      <td><%= student.firstname %></td>
+      <td><%= student.lastname %></td>
+
+      <td>
+        <span><%= link "Add Quiz Points", to: Routes.quiz_path(@conn, :new, student_id: student.id) %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+  <% end %>
+  <br>
+  <%= link "View Users", to: Routes.student_path(@conn, :index) %>
+</div>

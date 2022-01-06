@@ -1,0 +1,20 @@
+<div class="sub-container">
+<h1>Show Quiz</h1>
+
+<ul>
+
+  <li>
+    <strong>Items:</strong>
+    <%= @quiz.items %>
+  </li>
+
+  <li>
+    <strong>Score:</strong>
+    <%= @quiz.score %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.quiz_path(@conn, :edit, @quiz) %></span>
+<span><%= link "Back", to: Routes.quiz_path(@conn, :index) %></span>
+</div>

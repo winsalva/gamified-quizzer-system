@@ -1,0 +1,47 @@
+<div class="sub-container">
+<h1 align="center">Student Record</h1>
+
+<ul>
+
+  <li>
+    <strong>Firstname:</strong>
+    <%= @student.firstname %>
+  </li>
+
+  <li>
+    <strong>Lastname:</strong>
+    <%= @student.lastname %>
+  </li>
+
+</ul>
+
+<h3>Quiz Records</h3>
+<%= if @quizzes == [] do %>
+<p>No records yet.</p>
+<% else %>
+<table>
+  <thead>
+    <tr>
+      <th>Quiz no.</th>
+      <th>Subject</th>
+      <th>Items</th>
+      <th>Score</th>
+    </tr>
+  <thead>
+    <tbody>
+      <%= for quiz <- @quizzes do %>
+	  <tr>
+	    <td><%= quiz.id %></td>
+	    <td><%= quiz.subject %></td>
+	    <td><%= quiz.items %></td>
+	    <td><%= quiz.score %></td>
+	  </tr>
+	  <% end %>
+    </tbody>
+</table>
+<%= link "Calculate", to: Routes.quiz_path(@conn, :quiz_result, @student.id) %>
+<% end %>
+    
+
+<span><%= link "Back", to: Routes.student_path(@conn, :index) %></span>
+</div>

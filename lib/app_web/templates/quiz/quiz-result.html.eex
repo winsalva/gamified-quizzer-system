@@ -1,0 +1,35 @@
+<div class="sub-container">
+  <h1 align="center">Quiz Result</h1>
+  <table>
+    <thead>
+      <tr>
+	<th>Quiz no.</th>
+	<th>Subject</th>
+	<th>Items</th>
+	<th>Score</th>
+	<th>Result</th>
+	<th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for quiz <- @quizzes do %>
+	  <tr>
+	    <td><%= quiz.id %></td>
+	    <td><%= quiz.subject %></td>
+	    <td><%= quiz.items %></td>
+	    <td><%= quiz.score %></td>
+	    <td><%= result(quiz) %></td>
+	    <%= if status(quiz) == "Passed" do %>
+	    <td class="green"><%= status(quiz) %></td>
+	    <% else %>
+	    <td class="red"><%= status(quiz) %></td>
+	    <% end %>
+	  </tr>
+	  <% end %>
+    </tbody>
+  </table>
+      
+
+  <br>
+  <%= link "View Users", to: Routes.student_path(@conn, :index) %>
+</div>

@@ -1,0 +1,7 @@
+<div class="sub-container">
+<h1>Edit Quiz</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.quiz_path(@conn, :update, @quiz)) %>
+
+<span><%= link "Back", to: Routes.quiz_path(@conn, :index) %></span>
+</div>
