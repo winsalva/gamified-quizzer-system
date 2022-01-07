@@ -1,0 +1,110 @@
+<div class="sub-container">
+<h1 align="center">Student Attendances</h1>
+
+<div class="school-nav">
+  <%= link "List Students", to: Routes.student_path(@conn, :index) %>
+  <%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %>
+</div>
+
+<br>
+<%= if get_flash(@conn, :info) do %>
+  <div class="alert alert-info">
+    <p><%= get_flash(@conn, :info) %></p>
+  </div>
+<% end %>
+
+<%= if get_flash(@conn, :error) do %>
+  <div class="alert alert-danger">
+    <p><%= get_flash(@conn, :error) %></p>
+  </div>
+  <% end %>
+
+
+  <br>
+
+  <%= form_for @attendance, Routes.attendance_path(@conn, :create_student_attendance, %{id: @student.id}), fn f -> %>
+  <%= if @attendance.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+    <% end %>
+    <h3>Attendance for: <%= @student.firstname %> <%= @student.lastname %></h3>
+
+    <label>Date</label>
+<%= date_select f, :date, year: [options: 2022..2025], builder: fn b -> %>
+ <%= b.(:day, []) %> / <%= b.(:month, []) %> / <%= b.(:year, []) %>
+<% end %>
+<%= error_tag f, :date %>
+
+<label>Subject</label>
+<%= select f, :subject, [options: [
+    "SIA": "SIA",
+    "IAaS": "IAaS"
+    ]], prompt: "Select subject" %>
+<%= error_tag f, :subject %>
+
+<label>Session</label>
+<%= select f, :session, [options: [
+    "AM": "AM",
+    "PM": "PM"
+    ]], prompt: "Select session" %>
+<%= error_tag f, :session %>
+
+<label>Status</label>
+<%= select f, :status, [options: [
+    "Time-In": "Time-In",
+    "Time-Out": "Time-Out"
+    ]], prompt: "Select status" %>
+<%= error_tag f, :status %>
+
+<label>Time</label>
+<%= select f, :time, [options: [
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    "8": "8",
+    "9": "9",
+    "10": "10",
+    "11": "11",
+    "12": "12"
+    ]], prompt: "Select time" %>
+<%= error_tag f, :time %>
+<br>
+<%= submit "Save" %>
+<% end %>
+
+<%= if @attendances == [] do %>
+<p>Student has no record of attendance yet.</p>
+<% else %>
+<table>
+  <thead>
+    <tr>
+      <th colspan="6"><h2 align="center">Attendance Records</h2></th>
+    </tr>
+    
+    <tr>
+      <th>Subject</th>
+      <th>Session</th>
+      <th>Status</th>
+      <th>Time</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for attendance <- @attendances do %>
+	<tr>
+	  <td><%= attendance.subject %></td>
+	  <td><%= attendance.session %></td>
+	  <td><%= attendance.status %></td>
+	  <td><%= attendance.time %></td>
+	  <td><%= attendance.date %></td>
+	</tr>
+	<% end %>
+  </tbody>
+</table>
+<% end %>
+</div>

@@ -4,6 +4,7 @@
 <div class="school-nav">
   <%= link "New Student", to: Routes.student_path(@conn, :new) %>
   <%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %>
+  <%= link "List Attendances", to: Routes.attendance_path(@conn, :index) %>
 </div>
 
 <br>
@@ -31,7 +32,7 @@
   <tbody>
 <%= for student <- @students do %>
     <tr>
-      <td><%= student.firstname %></td>
+      <td><b><%= link student.firstname, to: Routes.attendance_path(@conn, :show_student_attendance, student.id) %></b></td>
       <td><%= student.lastname %></td>
 
       <td>

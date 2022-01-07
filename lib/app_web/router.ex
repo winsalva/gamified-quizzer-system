@@ -32,7 +32,15 @@ defmodule AppWeb.Router do
     resources "/quiz-and-exam", QuizController
     post "/search", QuizController, :search_student
     get "/quiz-results/:id", QuizController, :quiz_result
+   
+  end
 
+  scope "/school", AppWeb do
+    pipe_through :browser
+
+    get "/students/attendances/:id", AttendanceController, :show_student_attendance
+    post "/students/attendances", AttendanceController, :create_student_attendance
+    get "/students/attendances", AttendanceController, :index
   end
 
   scope "/users", AppWeb.User, as: :user do

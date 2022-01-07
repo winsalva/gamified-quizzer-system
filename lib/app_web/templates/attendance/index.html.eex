@@ -1,0 +1,55 @@
+
+<div class="sub-container">
+<h1 align="center">Listing Attendances</h1>
+
+<div class="school-nav">
+  <%= link "List Students", to: Routes.student_path(@conn, :index) %>
+  <%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %>
+</div>
+
+<br>
+<%= if get_flash(@conn, :info) do %>
+  <div class="alert alert-info">
+    <p><%= get_flash(@conn, :info) %></p>
+  </div>
+<% end %>
+
+<%= if get_flash(@conn, :error) do %>
+  <div class="alert alert-danger">
+    <p><%= get_flash(@conn, :error) %></p>
+  </div>
+  <% end %>
+
+  <%= if @attendances == [] do %>
+<p>No record of attendances yet.</p>
+<% else %>
+<table>
+  <thead>
+    <tr>
+      <th colspan="6"><h2 align="center">Attendance Records</h2></th>
+    </tr>
+
+    <tr>
+      <th>Name</th>
+      <th>Subject</th>
+      <th>Session</th>
+      <th>Status</th>
+      <th>Time</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for attendance <- @attendances do %>
+        <tr>
+	  <td><%= attendance.student.firstname %> <%= attendance.student.lastname %></td>
+          <td><%= attendance.subject %></td>
+          <td><%= attendance.session %></td>
+          <td><%= attendance.status %></td>
+          <td><%= attendance.time %></td>
+          <td><%= attendance.date %></td>
+        </tr>
+        <% end %>
+  </tbody>
+</table>
+<% end %>
+</div>
