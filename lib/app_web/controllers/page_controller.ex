@@ -4,6 +4,6 @@ defmodule AppWeb.PageController do
   def index(conn, _params) do
     #render(conn, :index)
     conn
-    |> redirect(to: Routes.student_path(conn, :index))
+    |> redirect(to: Routes.admin_session_path(conn, :new))
   end
 end

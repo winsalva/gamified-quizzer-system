@@ -1,7 +1,6 @@
 <div class="sub-container">
   <br>
   <h2 align="center"><strong>Admin Login</strong></h2>
-  <%= render(AppWeb.SharedView, "nav.html", conn: @conn) %>
 <%= if get_flash(@conn, :error) do %>
   <div class="alert alert-danger">
     <p><%= get_flash(@conn, :error) %></p>

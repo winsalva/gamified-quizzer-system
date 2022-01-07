@@ -26,7 +26,7 @@ defmodule AppWeb.Admin.SessionController do
           |> put_session(:user_id, nil)
           |> put_session(:admin_id, admin.id)
           |> configure_session(renew: true)
-          |> redirect(to: Routes.admin_page_path(conn, :index))
+          |> redirect(to: Routes.student_path(conn, :index))
         false ->
           conn
           |> put_flash(:error, "Username and password combination cannot be found!")
