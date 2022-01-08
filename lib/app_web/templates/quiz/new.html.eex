@@ -26,6 +26,30 @@
     ]], prompt: "Select subject" %>
 <%= error_tag f, :subject %>
 
+<label>Time</label>
+<%= select f, :time, [options: [
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    "8": "8",
+    "9": "9",
+    "10": "10",
+    "11": "11",
+    "12": "12"
+    ]], prompt: "Select time" %>
+<%= error_tag f, :time %>
+
+<label>Session</label>
+<%= select f, :session, [options: [
+    "AM": "AM",
+    "PM": "PM"
+    ]], prompt: "Select session" %>
+<%= error_tag f, :session %>
+
   <%= label f, :items %>
   <%= number_input f, :items %>
   <%= error_tag f, :items %>

@@ -5,6 +5,8 @@ defmodule App.QuizAndExam.Quiz do
   schema "quizzes" do
     belongs_to :student, App.School.Student
     field :date, :date
+    field :time, :string
+    field :session, :string
     field :subject, :string
     field :items, :integer
     field :score, :integer
@@ -15,6 +17,8 @@ defmodule App.QuizAndExam.Quiz do
   @allowed_fields [
     :student_id,
     :date,
+    :time,
+    :session,
     :subject,
     :items,
     :score

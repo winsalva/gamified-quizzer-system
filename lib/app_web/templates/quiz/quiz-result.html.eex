@@ -8,11 +8,12 @@
   <table>
     <thead>
       <tr>
-      <th colspan="2">First name: <%= @student.firstname %></th>
-      <th colspan="4">Last name: <%= @student.lastname %></th>
+      <th colspan="2">Student name: <%= @student.firstname %> <%= @student.lastname %></th>
+      <th colspan="5">Number of Quizzes: <%= length(@quizzes) %></th>
     </tr>
       <tr>
-	<th>Quiz no.</th>
+	<th>Date</th>
+	<th>Time</th>
 	<th>Subject</th>
 	<th>Items</th>
 	<th>Score</th>
@@ -23,7 +24,8 @@
     <tbody>
       <%= for quiz <- @quizzes do %>
 	  <tr>
-	    <td><%= quiz.id %></td>
+	    <td><%= quiz.date %></td>
+	    <td><%= quiz.time %> <%= quiz.session %></td>
 	    <td><%= quiz.subject %></td>
 	    <td><%= quiz.items %></td>
 	    <td><%= quiz.score %></td>
