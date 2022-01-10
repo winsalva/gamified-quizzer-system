@@ -12,7 +12,11 @@ defmodule App.School do
   Search for student lastname
   """
   def search_student(lastname) do
-    Repo.all(Student)
+    query =
+      from s in Student,
+        preload: [:attendances, :quizzes]
+	
+    Repo.all(query)
     |> Enum.filter(fn s -> String.upcase(s.lastname) == String.upcase(lastname) end)
   end
 

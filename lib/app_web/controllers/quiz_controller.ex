@@ -38,7 +38,7 @@ defmodule AppWeb.QuizController do
       {:ok, quiz} ->
         conn
         |> put_flash(:info, "Quiz points for #{student.firstname} was added successfully.")
-        |> redirect(to: Routes.student_path(conn, :index))
+        |> redirect(to: Routes.student_path(conn, :show, student_id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset, student: student)

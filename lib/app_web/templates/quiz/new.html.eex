@@ -2,7 +2,8 @@
   <h1 align="center">New Quiz Record</h1>
   <div class="school-nav">
     <%= link "List Students", to: Routes.student_path(@conn, :index) %>
-      <%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %>
+    <%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %>
+    <%= link "Student Attendance", to: Routes.attendance_path(@conn, :search_attendance) %>
   </div>
   <br>
 <%= form_for @changeset, Routes.quiz_path(@conn, :create, %{student_id: @student.id}), fn f -> %>
@@ -11,9 +12,9 @@
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
     <% end %>
-    <h3>Quiz points for: <%= @student.firstname %> <%= @student.lastname %></h3>
+    <h3>Student: <%= @student.firstname %> <%= @student.lastname %></h3>
 
-    <label>Date</label>
+    <label>Quiz Date</label>
 <%= date_select f, :date, year: [options: 2022..2025], builder: fn b -> %>
  <%= b.(:day, []) %> / <%= b.(:month, []) %> / <%= b.(:year, []) %>
 <% end %>
@@ -50,12 +51,12 @@
     ]], prompt: "Select session" %>
 <%= error_tag f, :session %>
 
-  <%= label f, :items %>
-  <%= number_input f, :items %>
+  <label>Quiz Items</label>
+  <%= number_input f, :items, placeholder: "ex. 100" %>
   <%= error_tag f, :items %>
 
-  <%= label f, :score %>
-  <%= number_input f, :score %>
+  <label>Quiz Score</label>
+  <%= number_input f, :score, placeholder: "ex. 93" %>
   <%= error_tag f, :score %>
 
   <div>

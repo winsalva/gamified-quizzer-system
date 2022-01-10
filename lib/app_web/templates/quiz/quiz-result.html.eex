@@ -1,8 +1,9 @@
 <div class="sub-container">
-  <h1 align="center">Quiz Result</h1>
+  <h1 align="center">Student Quiz Results</h1>
   <div class="school-nav">
     <%= link "List Students", to: Routes.student_path(@conn, :index) %>
     <%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %>
+    <%= link "Student Attendance", to: Routes.attendance_path(@conn, :search_attendance) %>
   </div>
   <br>
   <table>

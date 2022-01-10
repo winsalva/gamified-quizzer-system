@@ -1,11 +1,13 @@
 <div class="sub-container">
-<h1 align="center">Quiz and Exam</h1>
+<h1 align="center">Student Attendance</h1>
+
 <div class="school-nav">
   <%= link "List Students", to: Routes.student_path(@conn, :index) %>
-  <%= link "Student Attendance", to: Routes.attendance_path(@conn, :search_attendance) %>
+  <%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %>
 </div>
+
 <br>
-<%= form_for @conn, Routes.quiz_path(@conn, :search_student), fn f -> %>
+<%= form_for @conn, Routes.attendance_path(@conn, :search_student_attendance), fn f -> %>
 <%= text_input f, :lastname, placeholder: "Enter student lastname.." %>
 
 <%= submit "Search" %>
@@ -33,12 +35,12 @@
       <td><%= student.lastname %></td>
 
       <td>
-	<span><%= link "Show Quiz Record", to: Routes.student_path(@conn, :show, student), class: "td-blue" %></span>
-        <span><%= link "Add Quiz Record", to: Routes.quiz_path(@conn, :new, student_id: student.id), class: "td-blue" %></spa>
+        <span><%= link "Show Records", to: Routes.attendance_path(@conn, :show_student_attendance, student.id), class: "td-blue" %></span>
+        <span><%= link "Add Attendance", to: Routes.attendance_path(@conn, :new_attendance, student.id), class: "td-blue" %></spa>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-  <% end %>
+<% end %>
 </div>

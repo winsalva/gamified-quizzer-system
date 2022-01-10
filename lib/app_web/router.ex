@@ -38,9 +38,13 @@ defmodule AppWeb.Router do
   scope "/school", AppWeb do
     pipe_through :browser
 
+    get "/students/attendances/new/:id", AttendanceController, :new_attendance
+    get "/students/attendances/search", AttendanceController, :search_attendance
     get "/students/attendances/:id", AttendanceController, :show_student_attendance
     post "/students/attendances", AttendanceController, :create_student_attendance
     get "/students/attendances", AttendanceController, :index
+    post "/attendances/searches/lastname", AttendanceController, :search_student_attendance
+  
   end
 
   scope "/users", AppWeb.User, as: :user do

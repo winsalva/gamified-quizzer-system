@@ -19,7 +19,7 @@ defmodule AppWeb.StudentController do
     case School.create_student(student_params) do
       {:ok, student} ->
         conn
-        |> put_flash(:info, "Student created successfully.")
+        |> put_flash(:info, "New student added successfully.")
         |> redirect(to: Routes.student_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -45,7 +45,7 @@ defmodule AppWeb.StudentController do
     case School.update_student(student, student_params) do
       {:ok, student} ->
         conn
-        |> put_flash(:info, "Student record updated successfully.")
+        |> put_flash(:info, "Student #{student.firstname}'s profile was updated successfully.")
         |> redirect(to: Routes.student_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -55,10 +55,10 @@ defmodule AppWeb.StudentController do
 
   def delete(conn, %{"id" => id}) do
     student = School.get_student!(id)
-    {:ok, _student} = School.delete_student(student)
+    {:ok, student} = School.delete_student(student)
 
     conn
-    |> put_flash(:info, "Student record was deleted successfully.")
+    |> put_flash(:info, "Student #{student.firstname}'s account was deleted successfully.")
     |> redirect(to: Routes.student_path(conn, :index))
   end
 end

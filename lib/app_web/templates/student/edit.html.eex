@@ -1,5 +1,5 @@
 <div class="sub-container">
-<h1 align="center">Edit Student</h1>
+<h2 align="center">Edit Student Profile</h2>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.student_path(@conn, :update, @student)) %>
 </div>

@@ -1,10 +1,10 @@
 <div class="sub-container">
-<h1 align="center">Listing Students</h1>
+<h2 align="center">Listing Students</h2>
 
 <div class="school-nav">
   <%= link "New Student", to: Routes.student_path(@conn, :new) %>
   <%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %>
-  <%= link "List Attendances", to: Routes.attendance_path(@conn, :index) %>
+  <%= link "Student Attendance", to: Routes.attendance_path(@conn, :search_attendance) %>
 </div>
 
 <br>
@@ -32,13 +32,12 @@
   <tbody>
 <%= for student <- @students do %>
     <tr>
-      <td><b><%= link student.firstname, to: Routes.attendance_path(@conn, :show_student_attendance, student.id) %></b></td>
+      <td><%= student.firstname %></b></td>
       <td><%= student.lastname %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.student_path(@conn, :show, student), class: "td-blue" %></span>
-        <span><%= link "Edit", to: Routes.student_path(@conn, :edit, student), class: "td-blue" %></span>
-        <span><%= link "Delete", to: Routes.student_path(@conn, :delete, student), method: :delete, class: "td-red", data: [confirm: "Are you sure?"] %></span>
+        <span><%= link "Edit Profile", to: Routes.student_path(@conn, :edit, student), class: "td-blue" %></span>
+        <span><%= link "Delete Account", to: Routes.student_path(@conn, :delete, student), method: :delete, class: "td-red", data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
 <% end %>

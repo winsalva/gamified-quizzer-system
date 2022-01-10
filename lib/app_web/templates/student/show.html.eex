@@ -3,14 +3,27 @@
   <div class="school-nav">
     <%= link "List Students", to: Routes.student_path(@conn, :index) %>
     <%= link "Quiz and Exam", to: Routes.quiz_path(@conn, :index) %>
+    <%= link "Student Attendance", to: Routes.attendance_path(@conn, :search_attendance) %>
   </div>
-<br>
+  <br>
+
+<%= if get_flash(@conn, :info) do %>
+  <div class="alert alert-info">
+    <p><%= get_flash(@conn, :info) %></p>
+  </div>
+<% end %>
+
+<%= if get_flash(@conn, :error) do %>
+  <div class="alert alert-danger">
+    <p><%= get_flash(@conn, :error) %></p>
+  </div>
+  <% end %>
+  
 <%= if @quizzes == [] do %>
 <table>
   <thead>
     <tr>
-      <th colspan="2">First name: <%= @student.firstname %></th>
-      <th colspan="2">Last name: <%= @student.lastname %></th>
+      <th colspan="4">Student name: <%= @student.firstname %> <%= @student.lastname %></th>
     </tr>
   </thead>
 </table>
