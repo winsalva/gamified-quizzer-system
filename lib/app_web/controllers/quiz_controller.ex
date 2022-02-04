@@ -8,7 +8,8 @@ defmodule AppWeb.QuizController do
   def quiz_result(conn, %{"id" => id}) do
     quizzes = QuizAndExam.list_student_quiz_records(id)
     student = School.get_student!(id)
-    render(conn, "quiz-result.html", quizzes: quizzes, student: student)
+    total_average = QuizAndExam.get_student_quiz_total_average(id)
+    render(conn, "quiz-result.html", quizzes: quizzes, student: student, total_average: total_average)
   end
 
   def search_student(conn, %{"lastname" => lastname}) do

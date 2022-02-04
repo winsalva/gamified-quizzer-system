@@ -13,4 +13,12 @@ defmodule AppWeb.QuizView do
       "Failed"
     end
   end
+
+  def status2(avg) do
+    if avg >= 75 do
+      "Passed"
+    else
+      "Failed"
+    end
+  end
 end

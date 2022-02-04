@@ -19,10 +19,23 @@ defmodule App.QuizAndExam do
     Repo.all(query)
   end
 
+  def get_student_quiz_total_average(id) do
+    records = list_student_quiz_records(id)
+    len = length(records)
+
+    total_result =
+      records
+      |> Enum.reduce(0, fn q, acc -> (q.score / q.items * 100) + acc end)
+
+    total_avg =
+      (total_result / len)
+      |> round
+  end
+
   @doc """
   Returns the list of quizzes.
 
-  ## Examples
+  ##t Examples
 
       iex> list_quizzes()
       [%Quiz{}, ...]
