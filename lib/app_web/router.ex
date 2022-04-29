@@ -25,28 +25,6 @@ defmodule AppWeb.Router do
 
   end
 
-  scope "/schools", AppWeb do
-    pipe_through :browser
-
-    resources "/students", StudentController
-    resources "/quiz-and-exam", QuizController
-    post "/search", QuizController, :search_student
-    get "/quiz-results/:id", QuizController, :quiz_result
-   
-  end
-
-  scope "/school", AppWeb do
-    pipe_through :browser
-
-    get "/students/attendances/new/:id", AttendanceController, :new_attendance
-    get "/students/attendances/search", AttendanceController, :search_attendance
-    get "/students/attendances/:id", AttendanceController, :show_student_attendance
-    post "/students/attendances", AttendanceController, :create_student_attendance
-    get "/students/attendances", AttendanceController, :index
-    post "/attendances/searches/lastname", AttendanceController, :search_student_attendance
-  
-  end
-
   scope "/users", AppWeb.User, as: :user do
     pipe_through :browser
 
@@ -54,30 +32,6 @@ defmodule AppWeb.Router do
       :new, :create, :show, :index, :edit, :update
     ]
   end
-
-  scope "/videos", AppWeb.Video, as: :video do
-    pipe_through :browser
-
-    resources "/", PageController, only: [
-      :index, :new, :create, :edit, :update, :delete
-    ]
-
-  end
-
-  scope "/admins", AppWeb.Admin, as: :admin do
-    pipe_through :browser
-
-    get "/login", SessionController, :new
-    post "/login", SessionController, :create
-    delete "/logout", SessionController, :delete
-
-    resources "/", PageController, only: [
-      :index, :new, :create, :show, :edit, :update, :delete
-    ]
-
-  end
-
-  
 
   # Other scopes may use custom stacks.
   # scope "/api", AppWeb do
