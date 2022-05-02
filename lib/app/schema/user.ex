@@ -3,10 +3,13 @@ defmodule App.Schema.User do
   import Ecto.Changeset
 
   schema "users" do
+    has_many :answers, App.Schema.Answer
     field :username, :string
     field :password, :string, default: ""
-    field :seen, :boolean, default: false
-    field :subs_expire, :utc_datetime_usec
+    field :role, :string
+    field :school_id, :string
+    field :current_score, :integer, default: 0
+    field :approve, :boolean, default: false
     timestamps()
   end
 
@@ -14,19 +17,16 @@ defmodule App.Schema.User do
   @allowed_fields [
     :username,
     :password,
-    :seen,
-    :subs_expire
-  ]
-
-  @required_fields [
-    :username
+    :role,
+    :current_score,
+    :approve
   ]
 
   @doc false
   def changeset(user, params \\ %{}) do
     user
     |> cast(params, @allowed_fields)
-    |> validate_required(@required_fields)
+    |> validate_required(@allowed_fields)
   end
 
   @doc false
@@ -34,7 +34,7 @@ defmodule App.Schema.User do
     user
     |> cast(params, [:password])
     |> validate_required(:password)
-    |> validate_length(:password, min: 8)
+    |> validate_length(:password, min: 6)
     |> validate_length(:password, max: 20)
     |> validate_confirmation(:password, required: true)
     |> hash_password()
