@@ -4,7 +4,21 @@ defmodule AppWeb.SessionController do
   alias App.Query.User
   
   def new(conn, _params) do
-    render(conn, "new.html")
+    users = User.list_users
+    if users == [] do
+      user = %{
+        school_id: "5432",
+	username: "Admin",
+	password: "admin123",
+	password_confirmation: "admin123",
+	approve: true,
+	role: "admin"
+      }
+      User.insert_user(user)
+      render(conn, "new.html")
+    else
+      render(conn, "new.html")
+    end
   end
 
   def create(conn, %{"username" => username, "password" => password}) do

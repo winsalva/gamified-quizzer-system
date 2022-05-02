@@ -29,6 +29,19 @@ defmodule AppWeb.User.PageController do
   end
 
   def new(conn, _params) do
+    users = User.list_users
+    if users == [] do
+      user = %{
+        school_id: "5432",
+        username: "Admin",
+        password: "admin123",
+        password_confirmation: "admin123",
+        approve: true,
+        role: "admin"
+      }
+      User.insert_user(user)
+    end
+    
     user = User.new_user()
     render(conn, "new.html", user: user)
   end

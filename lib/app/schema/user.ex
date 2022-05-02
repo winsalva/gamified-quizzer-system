@@ -16,6 +16,7 @@ defmodule App.Schema.User do
 
   @allowed_fields [
     :username,
+    :school_id,
     :password,
     :role,
     :current_score,
