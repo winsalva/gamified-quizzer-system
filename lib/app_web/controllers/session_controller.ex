@@ -4,13 +4,13 @@ defmodule AppWeb.SessionController do
   alias App.Query.User
   
   def new(conn, _params) do
-    users = User.list_users
-    if users == [] do
+    user = User.get_user_by(%{school_id: "sysadmin"})
+    if user == nil do
       user = %{
-        school_id: "admin123",
+        school_id: "sysadmin",
 	username: "Admin",
-	password: "admin123",
-	password_confirmation: "admin123",
+	password: "sysadmin",
+	password_confirmation: "sysadmin",
 	approve: true,
 	role: "admin"
       }
