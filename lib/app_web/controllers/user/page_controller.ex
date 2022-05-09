@@ -118,6 +118,12 @@ defmodule AppWeb.User.PageController do
     end
   end
 
+  def delete(conn, %{"id" => id}) do
+    User.delete_user(id)
+    conn
+    |> redirect(to: Routes.user_page_path(conn, :show, conn.assigns.current_user.id))
+  end
+
   ## Ensure admin logged in
   defp ensure_admin_logged_in(conn, _options) do
     if conn.assigns.current_user && conn.assigns.current_user.role == "admin" do

@@ -33,7 +33,7 @@ defmodule AppWeb.Router do
     post "/update/:id/:status", PageController, :update_approval
     get "/reset-records/:user_id", PageController, :reset_record
     resources "/", PageController, only: [
-      :new, :create, :show, :edit, :update
+      :new, :create, :show, :edit, :update, :delete
     ]
   end
 

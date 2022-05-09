@@ -4,6 +4,15 @@ defmodule App.Query.User do
 
   import Ecto.Query, warn: false
 
+  def get_user_by(attr) do
+    Repo.get_by(User, attr)
+  end
+
+  def delete_user(id) do
+    get_user(id)
+    |> Repo.delete()
+  end
+
   @doc """
   Reset user records.
   """
@@ -54,7 +63,7 @@ defmodule App.Query.User do
 
   def insert_user(params) do
     %User{}
-    |> User.changeset(params)
+    |> User.changeset_with_password(params)
     |> Repo.insert()
   end
 
@@ -106,7 +115,7 @@ defmodule App.Query.User do
   def get_school_id_and_password(school_id, password) do
     query =
       from u in User,
-        where: u.school_id == ^school_id and u.password == ^password
+        where: u.school_id == ^school_id and u.password == ^password and u.approve == true
 
     Repo.one(query)
   end

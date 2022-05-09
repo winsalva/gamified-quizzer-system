@@ -6,6 +6,7 @@ defmodule App.Schema.User do
     has_many :answers, App.Schema.Answer
     field :username, :string
     field :password, :string, default: ""
+    field :hashed_password, :string
     field :role, :string
     field :school_id, :string
     field :current_score, :integer, default: 0
@@ -20,6 +21,7 @@ defmodule App.Schema.User do
   @allowed_fields [
     :username,
     :school_id,
+    :hashed_password,
     :password,
     :role,
     :current_score,
@@ -42,7 +44,7 @@ defmodule App.Schema.User do
     user
     |> cast(params, [:password])
     |> validate_required(:password)
-    |> validate_length(:password, min: 6)
+    |> validate_length(:password, min: 4)
     |> validate_length(:password, max: 20)
     |> validate_confirmation(:password, required: true)
     |> hash_password()
