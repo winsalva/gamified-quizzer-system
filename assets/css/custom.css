@@ -1,3 +1,159 @@
+#openNav {
+    font-size: 3.2rem;
+    padding: .5rem 1rem .5rem .1rem;
+}
+/* The side navigation menu */
+.sidenav {
+    z-index: 1001;
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript*/
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #0099e5; /*  */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 5rem; /* Place content 30px from the top *transition: 0.5s; /* 0.5 second transition effec\
+t to slide in the sidenav */
+    display: flex;
+    flex-direction: column;
+
+}
+/* The navigation menu links */
+
+.sidenav .menus {
+    color: #181818;
+    font-weight: 600;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 1.6rem;
+    display: block;
+    transition: 1s;
+
+}
+/* When you mouse over the navigation links, change their color */
+.sidenav .menus:hover {
+    color: #000;
+    background-color: #eee;
+    opacity: 0.8;
+}
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 2.5rem;
+    font-size: 3.5rem;
+    margin-left: 5rem;
+    padding: 0;
+    color: #000;
+    font-weight: 350;
+}
+
+
+.question-choices {
+    font-weight: 450;
+    margin: 0;
+    padding: 1rem;
+}
+.question-choices-options {
+    padding: 1rem;
+}
+.user-account-container {
+    text-align: center;
+}
+.user-name {
+    font-weight: 600;
+    color: #222;
+    font-size: 2.5rem;
+    margin-top: -1rem;
+}
+.user-id {
+    margin-top: -3rem;
+    color: #00a4e4;
+    font-size: 1.4rem;
+}
+.user-current-points {
+    margin-top: -1rem;
+    font-size: 2rem;
+    color: #555;
+    font-weight: 500;
+}
+.levels {
+    background-color: #00a4e4;
+    padding: .5rem 0;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin: 3rem 0 2rem 0;
+}
+.user-current-point {
+    font-weight: bold;
+    font-size: 4rem;
+    margin: -3rem 0 0 0;
+}
+.take-quiz-btns1 {
+    padding: 1rem 5rem;
+    margin: 2rem 0;
+    background-color: #131313;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #131313;
+    border-radius: .5rem;
+}
+.take-quiz-btns1:hover {
+    border: 1px solid #c0c0c0;
+    background-color: #c0c0c0;
+    border-radius: .5rem;
+    color: #fff;
+}
+.take-quiz-btns2 {
+    padding: 1rem 5rem;
+    margin: 2rem 0;
+    background-color: #c0c0c0;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #c0c0c0;
+    border-radius: .5rem;
+    opacity: 0.5;
+}
+
+.take-quiz-btns3 {
+    padding: 1rem 5rem;
+    margin: 2rem 0;
+    background-color: #c0c0c0;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #c0c0c0;
+    border-radius: .5rem;
+    opacity: 0.5;
+}
+.quiz-message {
+    color: #fff;
+    font-weight: bold;
+    padding: 3rem 4rem;
+    background-color: #00a4e4; 
+}
+.take-quiz-btns4 {
+    padding: 1rem 5rem;
+    margin: 5rem 0 2rem 0;
+    background-color: #131313;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #131313;
+    border-radius: .5rem;
+}
+.take-quiz-btns4:hover {
+    border: 1px solid #c0c0c0;
+    background-color: #c0c0c0;
+    border-radius: .5rem;
+    color: #fff;
+}
+.question-options {
+    display: flex;
+}
+.question-options label {
+    margin-left: .5rem;
+}
 .red {
     color: red;
 }
@@ -48,7 +204,73 @@
 .sub-container {
     margin: 0;
     padding: 0 1.5rem;
-    background-color: #181818;
+    background-color: #fff;
+}
+.logo-image-container {
+    text-align: center;
+}
+.menu-container {
+    text-align: center;
+    dislay: block;
+    padding: 0.5rem 0 1rem 0;
+}
+.close-btn {
+    padding: 1rem;
+    font-size: 3rem;
+}
+.close-btn:hover {
+    color: #c0c0c0;
+}
+#close {
+    display: none;
+    font-weight: 600;
+    font-size: 4.5rem;
+    color: #0099e5;
+}
+#menu-options {
+    display: none;
+    border-bottom: 1px solid #eee;
+}
+#menu-options a {
+    font-size: 1.8rem;
+    font-weight: 450;
+    padding-bottom: .2rem;
+    display: flex;
+    flex-direction: column;
+    color: #0099e5;
+}
+#menu-options a:hover {
+    color: #c0c0c0;
+}
+#open {
+    font-weight: 500;
+    font-size: 4.5rem;
+    color: #0099e5;
+}
+.gqs-img-container img {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+}
+.nav-title-container {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    background-color: #fff;
+    display: flex;
+    width: 100%;
+    color: #0099e5;
+}
+.page-content-container {
+    margin-top: 6rem;
+}
+.nav-title {
+    font-weight: 500;
+    font-size: 2.2rem;
+    margin-top: 1.2rem;
+}
+.page-content {
+    text-align: center;
 }
 .options {
     display: flex;
@@ -113,7 +335,7 @@
     border: 1px solid #606c76;
 }
 h1, h2 {
-    color: #ddd;
+    color: #000;
     font-family: serif;
 }
 .v-title {

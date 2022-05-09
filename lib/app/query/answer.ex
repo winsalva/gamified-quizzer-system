@@ -5,6 +5,20 @@ defmodule App.Query.Answer do
 
   alias App.Repo
   alias App.Schema.Answer
+  import Ecto.Query, warn: false
+  
+
+  @doc """
+  List user answered question based on level
+  """
+  def list_user_answered_questions_on_level(user_id, level) do
+    query =
+      from a in Answer,
+        where: a.user_id == ^user_id and a.level == ^level
+
+    Repo.all(query)
+  end
+    
 
   @doc """
   New answer.

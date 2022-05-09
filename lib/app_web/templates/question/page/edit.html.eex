@@ -1,0 +1,25 @@
+<div class="sub-container">
+  <div class="close-btn" onclick="back();">&times;</div>
+  <h2 align="center"><strong>Edit Question</strong></h2>
+  <%= form_for @question, Routes.question_page_path(@conn, :update, @question.data.id), fn f -> %>
+  <label>Level</label>
+  <%= select f, :level, [options: [
+      "1": 1, "2": 2, "3": 3
+      ]], prompt: "Select level" %>
+  <%= error_tag f, :level %>
+
+  <label>Question</label>
+  <%= textarea f, :question, placeholder: "Write the question here.." %>
+  <%= error_tag f, :question %>
+
+  <label>Choices</label>
+  <%= textarea f, :options, placeholder: "Start each choices with a #" %>
+  <%= error_tag f, :options %>
+
+  <label>Answer</label>
+  <%= number_input f, :answer, placeholder: "Write the number of the correct answer..." %>
+  <%= error_tag f, :answer %>
+
+  <%= submit "Save Changes" %>
+  <% end %>
+</div>

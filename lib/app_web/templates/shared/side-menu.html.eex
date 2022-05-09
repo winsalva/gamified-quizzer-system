@@ -1,0 +1,30 @@
+<div class="nav-title-container">
+  <div id="openNav">&#8801;</div>
+  <div class="nav-title"><%= @title %></div>
+</div>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" id="closeNav">&times;</a>
+  <a class="menus" href="<%= Routes.page_path(@conn, :index) %>">Home</a>
+  <%= if @conn.assigns.current_user && @conn.assigns.current_user.role == "user" do %>
+  <a class="menus" href="<%= Routes.user_page_path(@conn, :show, @conn.assigns.current_user.id) %>">My Account</a>
+  <% end %>
+  <%= if @conn.assigns.current_user && @conn.assigns.current_user.role == "admin" do %>
+  <a class="menus" href="<%= Routes.user_page_path(@conn, :show, @conn.assigns.current_user.id) %>">My Account</a>
+  <a class="menus" href="<%= Routes.user_page_path(@conn, :index, "Approved") %>">Approved Users</a>
+  <a class="menus" href="<%= Routes.user_page_path(@conn, :index, "Unapproved") %>">Unapproved Users</a>
+  <a class="menus" href="<%= Routes.question_page_path(@conn, :new) %>">Add New Question</a>
+      <a class="menus" href="<%= Routes.question_page_path(@conn, :view_questions, "level-1") %>">Level 1 Questions</a>
+      <a class="menus" href="<%= Routes.question_page_path(@conn, :view_questions, "level-2") %>">Level 2 Questions</a>
+      <a class="menus" href="<%= Routes.question_page_path(@conn, :view_questions, "level-3") %>">Level 3 Questions</a>
+      <% end %>
+      
+      <%= if @conn.assigns.current_user do %>
+
+    <%= link "Log out", to: Routes.session_path(@conn, :delete), class: "menus", method: :delete, data: [confirm: "Are you sure?"] %>
+    <% else %>
+    <%= link "Log in", to: Routes.session_path(@conn, :new), class: "menus" %> 
+    <%= link "Register", to: Routes.user_page_path(@conn, :new), class: "menus" %>
+    <% end %>
+  
+</div>

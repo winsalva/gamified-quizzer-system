@@ -1,15 +1,72 @@
 
+  <div class="logo-image-container">
+    <img src="/images/gqs-logo.jpg"/>
+  </div>
+  <!-- Menu -->
+ <div class="sub-container">
+<div class="menu-container">
+  <div class="open-close-toggle-container">
+    <div id="open">&#8801;</div>
+    <div id="close">&times;</div>
+  </div>
+  <div>
+  <div id="menu-options">
+    <%= link "Home", to: Routes.page_path(@conn, :index) %>
+    <%= if @conn.assigns.current_user do %>
+    <%= link "My Account", to: Routes.user_page_path(@conn, :show, @conn.assigns.current_user.id) %>
+    <%= link "Log Out", to: Routes.session_path(@conn, :delete), method: :delete, data: [confirm: "Are you sure?"] %>
+    <% else %>
+    <%= link "Log In", to: Routes.session_path(@conn, :new) %> 
+    <%= link "Register Account", to: Routes.user_page_path(@conn, :new) %>
+    <% end %>
+    <br>
+    </div>
+  </div>
+</div>
 
-<div class="sub-container">
-  <br><br>
-  <h1 class="center" align="center">
-    <strong>My Website!</strong>
-  </h1>
-  <%= render(AppWeb.SharedView, "nav.html", conn: @conn) %>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+  <%= if get_flash(@conn, :error) do %>
+  <div class="alert alert-danger">
+    <p><%= get_flash(@conn, :error) %></p>
+  </div>
+  <% end %>
+  <%= if get_flash(@conn, :info) do %>
+  <div class="alert alert-info">
+    <p><%= get_flash(@conn, :info) %></p>
+  </div>
+  <% end %>
 
-  <div class="email-option">
-    <a href="mailto:winsalva396@gmail.com">Email Me</a>
+  <!-- Page Content -->
+
+  <div class="page-content">
+
+    <div class="gqs-img-container">
+      <img src="/images/gqs-1.jpeg"/>
+    </div>
+
+    <h2><b>Fun</b></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+
+    <div class="gqs-img-container">
+      <img src="/images/gqs-4.jpeg"/>
+    </div>
+
+    <h2><b>Competitive</b></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+
+    <div class="gqs-img-container">
+      <img src="/images/gqs-2.png"/>
+    </div>
+
+    <h2><b>Engaging</b></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+
+    <div class="gqs-img-container">
+      <img src="/images/gqs-3.png"/>
+    </div>
+
+    <h2><b>Educative</b></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+
   </div>
 </div>
 

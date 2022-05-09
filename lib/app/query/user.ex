@@ -1,8 +1,27 @@
 defmodule App.Query.User do
   alias App.Repo
-  alias App.Schema.User
+  alias App.Schema.{User, Answer}
 
   import Ecto.Query, warn: false
+
+  @doc """
+  Reset user records.
+  """
+  def reset_user_record(user_id) do
+    params = %{
+      current_score: 0,
+      level_1: false,
+      level_2: false,
+      level_3: false
+    }
+    update_user(user_id, params)
+
+    query =
+      from a in Answer,
+        where: a.user_id == ^user_id
+
+    Repo.delete_all(query)
+  end
 
   @doc """
   Checks for pass expiration on users table periodically.
@@ -47,6 +66,28 @@ defmodule App.Query.User do
     Repo.all(query)
   end
 
+  @doc """
+  List approved users.
+  """
+  def list_approved_users do
+    query =
+      from u in User,
+        where: u.approve == true and u.role != "admin"
+
+    Repo.all(query)
+  end
+
+  @doc """
+  List unapproved users.
+  """
+  def list_unapproved_users do
+    query =
+      from u in User,
+        where: u.approve == false
+
+    Repo.all(query)
+  end
+
   def get_user(id) do
     Repo.get(User, id)
   end
@@ -62,10 +103,10 @@ defmodule App.Query.User do
     |> Repo.update()
   end
 
-  def get_username_and_password(username, password) do
+  def get_school_id_and_password(school_id, password) do
     query =
       from u in User,
-        where: u.username == ^username and u.password == ^password
+        where: u.school_id == ^school_id and u.password == ^password
 
     Repo.one(query)
   end

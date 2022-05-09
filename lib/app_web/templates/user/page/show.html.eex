@@ -1,4 +1,64 @@
 <div class="sub-container">
-  <h1>User</h1>
-  
+<%= if @conn.assigns.current_user && @conn.assigns.current_user.role == "user" do %>
+<%= render(AppWeb.SharedView, "side-menu.html", conn: @conn, title: "My Account") %>
+<div class="page-content-container">
+<div class="user-account-container">
+  <img src="/images/gqs-user.png"/>
+  <p class="user-name"><%= @conn.assigns.current_user.username %></p>
+  <p class="user-id">ID: <%= @conn.assigns.current_user.school_id %></p>
+  <p class="user-current-points">Current Points: </p>
+  <p class="user-current-point"><%= @conn.assigns.current_user.current_score %></p>
+
+
+  <p class="levels">Level 1: &nbsp;&nbsp;&nbsp <%= length(@level_1_answers) %>/<%= length(@level_1_questions) %></p>
+  <%= cond do %>
+  <% @conn.assigns.current_user.level_1 == false -> %>
+  <%= link "Take A Quiz", to: Routes.quiz_page_path(@conn, :new, 1), class: "take-quiz-btns1" %>
+  <% true -> %>
+  <%= link "Done", to: "", class: "take-quiz-btns3" %>
+  <% end %>
+  <p class="levels">Level 2: &nbsp;&nbsp;&nbsp; <%= length(@level_2_answers) %>/<%= length(@level_2_questions) %></p>
+  <%= cond do %>
+  <% @conn.assigns.current_user.level_1 == true && @conn.assigns.current_user.level_2 == false -> %>
+  <%= link "Take A Quiz", to: Routes.quiz_page_path(@conn, :new, 2), class: "take-quiz-btns1" %>
+  <% @conn.assigns.current_user.level_1 == false -> %>
+  <%= link "Take A Quiz", to: "", class: "take-quiz-btns2" %>
+  <% true -> %>
+  <%= link "Done", to: "", class: "take-quiz-btns3" %>
+  <% end %>
+  <p class="levels">Level 3: &nbsp;&nbsp;&nbsp; <%= length(@level_3_answers) %>/<%= length(@level_3_questions) %></p>
+  <%= cond do %>
+  <% @conn.assigns.current_user.level_1 == true && @conn.assigns.current_user.level_2 == true && @conn.assigns.current_user.level_3 == false -> %>
+  <%= link "Take A Quiz", to: Routes.quiz_page_path(@conn, :new, 3), class: "take-quiz-btns1" %>
+  <% @conn.assigns.current_user.level_1 == false || @conn.assigns.current_user.level_2 == false || @conn.assigns.current_user.level_3 == false -> %>
+  <%= link "Take A Quiz", to: "", class: "take-quiz-btns2" %>
+  <% true -> %>
+  <%= link "Done", to: "", class: "take-quiz-btns3" %>
+  <% end %>
+
+  <br />
+  <br />
+  <br />
+
+  <%= cond do %>
+  <% @conn.assigns.current_user.level_3 == true && @conn.assigns.current_user.current_score >= 1000000 -> %>
+  <div class="quiz-message">Congrats, you win!!!</div>
+  <br/>
+  <%= link "Play Again?", to: Routes.user_page_path(@conn, :reset_record, @conn.assigns.current_user.id), class: "take-quiz-btns4" %>
+  <% @conn.assigns.current_user.level_3 == true && @conn.assigns.current_user.current_score < 1000000 -> %>
+  <div class="quiz-message">Sorry, you lose...Better luck next time!</div>
+  <br/>
+  <%= link "Play Again?", to: Routes.user_page_path(@conn, :reset_record, @conn.assigns.current_user.id), class: "take-quiz-btns4" %>
+  <% true -> %>
+  <p></p>
+  <% end %>
+
+  <br />
+  <br />
+  <br />
+</div>
+</div>
+<% else %>
+<%= render(AppWeb.SharedView, "side-menu.html", conn: @conn, title: "Admin Dashboard") %>
+<% end %>
 </div>

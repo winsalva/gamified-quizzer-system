@@ -7,7 +7,7 @@ defmodule AppWeb.SessionController do
     users = User.list_users
     if users == [] do
       user = %{
-        school_id: "5432",
+        school_id: "admin123",
 	username: "Admin",
 	password: "admin123",
 	password_confirmation: "admin123",
@@ -21,22 +21,21 @@ defmodule AppWeb.SessionController do
     end
   end
 
-  def create(conn, %{"username" => username, "password" => password}) do
+  def create(conn, %{"school_id" => school_id, "password" => password}) do
     if password == "" do
       conn
       |> put_flash(:error, "Password can't be empty!")
       |> render("new.html")
     else
-      case User.get_username_and_password(username, password) do
+      case User.get_school_id_and_password(school_id, password) do
         %App.Schema.User{} = user ->
 	  conn
 	  |> put_session(:user_id, user.id)
-	  |> put_session(:admin_id, nil)
 	  |> configure_session(renew: true)
-	  |> redirect(to: Routes.video_page_path(conn, :index))
+	  |> redirect(to: Routes.user_page_path(conn, :show, user.id))
 	nil ->
 	  conn
-	  |> put_flash(:error, "Username and password combination cannot be found!")
+	  |> put_flash(:error, "School Id and password combination cannot be found!")
 	  |> render("new.html")
       end
     end

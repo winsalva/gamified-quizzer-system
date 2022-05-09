@@ -1,7 +1,6 @@
 <div class="sub-container">
-  <br><br>
-  <h2 align="center"><strong>Register</strong></h2>
-  <%= render(AppWeb.SharedView, "nav.html", conn: @conn) %>
+  <div class="close-btn" onclick="back();">&times;</div>
+  <h2 align="center"><strong>Create Account</strong></h2>
   
   <%= if get_flash(@conn, :error) do %>
   <div class="alert alert-danger">
@@ -9,13 +8,28 @@
   </div>
 <% end %>
 <%= form_for @user, Routes.user_page_path(@conn, :create), fn f -> %>
-<label>Username</label>
-<%= text_input f, :username, placeholder: "Enter username.." %>
+<label>Fullname</label>
+<%= text_input f, :username, placeholder: "Enter your fullname.." %>
 <%= error_tag f, :username %>
 
-<%= submit "Register" %>
+<label>School Id</label>
+<%= text_input f, :school_id, placeholder: "Enter your school id.." %>
+<%= error_tag f, :school_id %>
+
+<label>Password</label>
+<%= password_input f, :password, placeholder: "Create your password.." %>
+<%= error_tag f, :password %>
+
+<label>Confirm Password</label>
+<%= password_input f, :password_confirmation, placeholder: "Re-type your pasword.." %>
+<%= error_tag f, :password_confirmation %>
+
+<br />
+<br />
+
+<div align="center">
+  <%= submit "Create Account" %>
+</div>
+
 <% end %>
-  <div class="email-option">
-    <a href="mailto:winsalva396@gmail.com">Email Me</a>
-  </div>
 </div>

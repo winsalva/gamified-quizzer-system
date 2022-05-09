@@ -4,7 +4,24 @@ defmodule App.Query.Question do
   """
 
   alias App.Repo
-  alias App.Schema.Question
+  alias App.Schema.{Question, Answer}
+  import Ecto.Query, warn: false
+
+  def list_unanswered_questions_of_user_by_level(user_id, level) do
+    answered_questions =
+      from a in Answer,
+        where: a.user_id == ^user_id and a.level == ^level,
+	select: a.question_id
+
+    answered = Repo.all(answered_questions)
+	
+    query =
+      from q in Question,
+        where: q.level == ^level and q.id not in ^answered
+
+    Repo.all(query)
+    |> Enum.shuffle()
+  end
 
   @doc """
   New question.
@@ -20,6 +37,7 @@ defmodule App.Query.Question do
   def insert_question(params) do
     %Question{}
     |> Question.changeset(params)
+    |> Repo.insert()
   end
 
   @doc """
@@ -27,6 +45,39 @@ defmodule App.Query.Question do
   """
   def list_questions do
     Repo.all(Question)
+  end
+
+  @doc """
+  List level 1 questions.
+  """
+  def list_level_1_questions do
+    query =
+      from q in Question,
+        where: q.level == 1
+
+    Repo.all(query)
+  end
+
+  @doc """
+  List level 2 questions.
+  """
+  def list_level_2_questions do
+    query =
+      from q in Question,
+        where: q.level == 2
+
+    Repo.all(query)
+  end
+
+  @doc """
+  List level 3 questions.
+  """
+  def list_level_3_questions do
+    query =
+      from q in Question,
+        where: q.level == 3
+
+    Repo.all(query)
   end
 
   @doc """
@@ -51,5 +102,13 @@ defmodule App.Query.Question do
     get_question(id)
     |> Question.changeset(params)
     |> Repo.update()
+  end
+
+  @doc """
+  Deletes a question by its id.
+  """
+  def delete_question(id) do
+    get_question(id)
+    |> Repo.delete()
   end
 end

@@ -1,0 +1,18 @@
+<div class="menu-container">
+  <div class="open-close-toggle-container">
+    <a id="open">Menu</a>
+    <a id="close">Close</a>
+  </div>
+  <div>
+  <div id="menu-options">
+    <%= link "Home", to: Routes.page_path(@conn, :index) %>
+    <%= if @conn.assigns.current_user do %>
+    <%= link "My Account", to: Routes.user_page_path(@conn, :show, @conn.assigns.current_user.id) %>
+    <%= link "Log out", to: Routes.session_path(@conn, :delete), method: :delete, data: [confirm: "Are you sure?"] %>
+    <% else %>
+    <%= link "Log in", to: Routes.session_path(@conn, :new) %> |
+    <%= link "Create Account", to: Routes.user_page_path(@conn, :new) %>
+    <% end %>
+    </div>
+  </div>
+</div>

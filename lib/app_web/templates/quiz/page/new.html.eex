@@ -1,0 +1,20 @@
+<div class="sub-container">
+  <div class="close-btn" onclick="back();">&times;</div>
+
+  <%= form_for @answer, Routes.quiz_page_path(@conn, :create, %{question_id: @question.id, level: @level}), fn f -> %>
+  <h2><strong><%= @question.question %></strong></h2>
+  <%= for {q, i} <- Enum.with_index(split_options(@question.options), 1) do %>
+      <p class="question-choices"><%= i %>.   <%= q %></p>
+      <% end %>
+      <div class="question-choices-options">
+      <label>Choices:</label>
+      <%= select f, :answer, [options: 1..length(split_options(@question.options))] %>
+      <%= error_tag f, :answer %>
+      <div>
+	<%= submit "Submit" %>
+      </div>
+      </div>
+      
+  <% end %>
+
+</div>

@@ -10,6 +10,9 @@ defmodule App.Schema.User do
     field :school_id, :string
     field :current_score, :integer, default: 0
     field :approve, :boolean, default: false
+    field :level_1, :boolean, default: false
+    field :level_2, :boolean, default: false
+    field :level_3, :boolean, default: false
     timestamps()
   end
 
@@ -20,7 +23,10 @@ defmodule App.Schema.User do
     :password,
     :role,
     :current_score,
-    :approve
+    :approve,
+    :level_1,
+    :level_2,
+    :level_3
   ]
 
   @doc false
@@ -28,6 +34,7 @@ defmodule App.Schema.User do
     user
     |> cast(params, @allowed_fields)
     |> validate_required(@allowed_fields)
+    |> unique_constraint(:school_id)
   end
 
   @doc false

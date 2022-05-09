@@ -1,0 +1,25 @@
+<div class="sub-container">
+<%= if @conn.assigns.current_user && @conn.assigns.current_user.role == "user" do %>
+<%= render(AppWeb.SharedView, "side-menu.html", conn: @conn, title: "My Account") %>
+<% else %>
+<%= render(AppWeb.SharedView, "side-menu.html", conn: @conn, title: "Admin Dashboard") %>
+<% end %>
+
+<div class="page-content-container">
+  <%= if @questions == [] do %>
+  <br>
+  <p align="center">No Records Yet</p>
+  <% else %>
+  <%= for {q, i} <- Enum.with_index(@questions, 1) do %>
+      <p><b><%= i %>. <%= q.question %>  <%= link "Edit", to: Routes.question_page_path(@conn, :edit, q.id) %> | <%= link "Delete", to: Routes.question_page_path(@conn, :delete, q.id), method: :delete, data: [confirm: "Are you sure?"] %></b></p>
+      <%= for option <- split_options(q.options) do %>
+	  <div class="question-options">
+	    <input type="radio"/>
+	    <label><%= option %></label>
+	  </div>
+	  <% end %>
+      <p>Answer: <%= q.answer %></p>
+      <% end %>
+      <% end %>
+</div>
+</div>

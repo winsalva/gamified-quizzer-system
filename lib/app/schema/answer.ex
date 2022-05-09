@@ -5,6 +5,7 @@ defmodule App.Schema.Answer do
   schema "answers" do
     belongs_to :user, App.Schema.User
     belongs_to :question, App.Schema.Question
+    field :level, :integer
     field :answer, :integer
     field :is_correct, :boolean
     field :point, :integer
@@ -17,6 +18,7 @@ defmodule App.Schema.Answer do
   @allowed_fields [
     :user_id,
     :question_id,
+    :level,
     :answer,
     :is_correct,
     :point,

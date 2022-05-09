@@ -29,9 +29,31 @@ defmodule AppWeb.Router do
   scope "/users", AppWeb.User, as: :user do
     pipe_through :browser
 
+    get "/lists/:title", PageController, :index
+    post "/update/:id/:status", PageController, :update_approval
+    get "/reset-records/:user_id", PageController, :reset_record
     resources "/", PageController, only: [
-      :new, :create, :show, :index, :edit, :update
+      :new, :create, :show, :edit, :update
     ]
+  end
+
+  scope "/questions", AppWeb.Question, as: :question do
+    pipe_through :browser
+
+    get "/lists/:level", PageController, :view_questions
+
+    resources "/", PageController, only: [
+      :new, :create, :show, :edit, :update, :delete
+    ]
+  end
+
+  ## Quiz Routes ##
+  scope "/quiz", AppWeb.Quiz, as: :quiz do
+    pipe_through :browser
+
+    get "/new/:level", PageController, :new
+    post "/", PageController, :create
+
   end
 
   # Other scopes may use custom stacks.
