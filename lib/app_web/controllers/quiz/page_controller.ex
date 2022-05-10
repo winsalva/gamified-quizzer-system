@@ -5,6 +5,73 @@ defmodule AppWeb.Quiz.PageController do
 
   alias App.Query.{Answer, Question, User}
 
+  def view_ranking(conn, %{"level" => level}) do
+    {level, _} = Integer.parse(level)
+    if conn.assigns.current_user.role == "user" do
+      case level do
+        1 ->
+	  accounts = Answer.list_user_rankings_per_level(level)
+	  params = [
+	    accounts: accounts,
+	    title: "My Account"
+	  ]
+	  render(conn, "view-ranking.html", params)
+	2 ->
+          accounts = Answer.list_user_rankings_per_level(level)
+          params = [
+            accounts: accounts,
+            title: "My Account"
+          ]
+          render(conn, "level2-ranking.html", params)
+	3 ->
+          accounts = Answer.list_user_rankings_per_level(level)
+          params = [
+            accounts: accounts,
+            title: "My Account"
+          ]
+          render(conn, "level3-ranking.html", params)
+	4 ->
+          accounts = User.list_winners()
+          params = [
+            accounts: accounts,
+            title: "My Account"
+          ]
+          render(conn, "winner-ranking.html", params)
+	end
+    else
+      case level do
+        1 ->
+          accounts = Answer.list_user_rankings_per_level(level)
+          params = [
+            accounts: accounts,
+            title: "Admin Dashboard"
+          ]
+          render(conn, "view-ranking.html", params)
+	2 ->
+          accounts = Answer.list_user_rankings_per_level(level)
+          params = [
+            accounts: accounts,
+            title: "Admin Dashboard"
+          ]
+          render(conn, "level2-ranking.html", params)
+	3 ->
+          accounts = Answer.list_user_rankings_per_level(level)
+          params = [
+            accounts: accounts,
+            title: "Admin Dashboard"
+          ]
+          render(conn, "level3-ranking.html", params)
+	4 ->
+          accounts = User.list_winners()
+          params = [
+            accounts: accounts,
+            title: "Admin Dashboard"
+          ]
+          render(conn, "winner-ranking.html", params)
+      end
+    end
+  end
+
   def new(conn, %{"level" => level}) do
     {game_level, _} = Integer.parse(level)
     user_id = conn.assigns.current_user.id

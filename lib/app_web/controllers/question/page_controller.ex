@@ -30,7 +30,7 @@ defmodule AppWeb.Question.PageController do
       {:ok, question} ->
         conn
 	|> put_flash(:info, "New question added!")
-	|> redirect(to: Routes.user_page_path(conn, :show, conn.assigns.current_user))
+	|> redirect(to: Routes.quiz_page_path(conn, :view_ranking, 1))
       {:error, %Ecto.Changeset{} = question} ->
         conn
 	|> render(:new, question: question)
@@ -46,7 +46,7 @@ defmodule AppWeb.Question.PageController do
     case Question.update_question(id, params) do
       {:ok, _question} ->
         conn
-	|> redirect(to: Routes.user_page_path(conn, :show, conn.assigns.current_user.id))
+	|> redirect(to: Routes.quiz_page_path(conn, :view_ranking, 1))
       {:error, %Ecto.Changeset{} = question} ->
         conn
 	|> render(:edit, question: question)
@@ -56,6 +56,6 @@ defmodule AppWeb.Question.PageController do
   def delete(conn, %{"id" => id}) do
     Question.delete_question(id)
     conn
-    |> redirect(to: Routes.user_page_path(conn, :show, conn.assigns.current_user.id))
+    |> redirect(to: Routes.quiz_page_path(conn, :view_ranking, 1))
   end
 end

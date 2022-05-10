@@ -8,9 +8,10 @@
   <a class="menus" href="<%= Routes.page_path(@conn, :index) %>">Home</a>
   <%= if @conn.assigns.current_user && @conn.assigns.current_user.role == "user" do %>
   <a class="menus" href="<%= Routes.user_page_path(@conn, :show, @conn.assigns.current_user.id) %>">My Account</a>
+  <a class="menus" href="<%= Routes.quiz_page_path(@conn, :view_ranking, 1) %>">Quiz Rankings</a>
   <% end %>
   <%= if @conn.assigns.current_user && @conn.assigns.current_user.role == "admin" do %>
-  <a class="menus" href="<%= Routes.user_page_path(@conn, :show, @conn.assigns.current_user.id) %>">My Account</a>
+  <a class="menus" href="<%= Routes.quiz_page_path(@conn, :view_ranking, 1) %>">Quiz Rankings</a>
   <a class="menus" href="<%= Routes.user_page_path(@conn, :index, "Approved") %>">Approved Users</a>
   <a class="menus" href="<%= Routes.user_page_path(@conn, :index, "Unapproved") %>">Unapproved Users</a>
   <a class="menus" href="<%= Routes.question_page_path(@conn, :new) %>">Add New Question</a>

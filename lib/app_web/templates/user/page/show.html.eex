@@ -1,5 +1,6 @@
 <div class="sub-container">
-<%= if @conn.assigns.current_user && @conn.assigns.current_user.role == "user" do %>
+  <%= cond do %>
+  <% @conn.assigns.current_user && @conn.assigns.current_user.role == "user" -> %>
 <%= render(AppWeb.SharedView, "side-menu.html", conn: @conn, title: "My Account") %>
 <div class="page-content-container">
 <div class="user-account-container">
@@ -63,7 +64,10 @@
   <br />
 </div>
 </div>
-<% else %>
+<% @conn.assigns.current_user && @conn.assigns.current_user.role == "admin" -> %>
 <%= render(AppWeb.SharedView, "side-menu.html", conn: @conn, title: "Admin Dashboard") %>
+
+<% true -> %>
+<%= render(AppWeb.SharedView, "side-menu.html", conn: @conn, title: "Gamified Quizzer System") %>
 <% end %>
 </div>

@@ -48,11 +48,12 @@ defmodule AppWeb.Router do
   end
 
   ## Quiz Routes ##
-  scope "/quiz", AppWeb.Quiz, as: :quiz do
+  scope "/quizzes", AppWeb.Quiz, as: :quiz do
     pipe_through :browser
 
     get "/new/:level", PageController, :new
     post "/", PageController, :create
+    get "/player-rankings/:level", PageController, :view_ranking
 
   end
 

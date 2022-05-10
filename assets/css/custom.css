@@ -49,7 +49,37 @@ t to slide in the sidenav */
     font-weight: 350;
 }
 
-
+.quiz-ranking-options {
+    display: flex;
+}
+.quiz-ranking-options a {
+    flex: 1;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+.quiz-ranking-options .active {
+    border-bottom: 1.5px solid #0099e5;
+}
+.quiz-ranking-account-container {
+    display: flex;
+    margin: 2rem 0;
+}
+.quiz-ranking-account-container img {
+    width: 5rem;
+    height: 5rem;
+}
+.quiz-ranking-account-details {
+    padding: 0 0 0 1rem;
+}
+.quiz-ranking-account-name {
+    font-weight: bold;
+    margin: 0;
+}
+.quiz-ranking-account-points {
+    margin: 0;
+    font-weight: 400;
+    font-size: 1.2rem;
+}
 .question-choices {
     font-weight: 450;
     margin: 0;

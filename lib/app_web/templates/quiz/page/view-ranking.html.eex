@@ -1,0 +1,32 @@
+<div class="sub-container">
+  <%= render(AppWeb.SharedView, "side-menu.html", conn: @conn, title: @title) %>
+  <div class="page-content-container">
+    <h3 align="center"><b>Quiz Rankings</b></h3>
+    <div class="quiz-ranking-options">
+      <%= link "Level 1", to: Routes.quiz_page_path(@conn, :view_ranking, 1), class: "active" %>
+      <%= link "Level 2", to: Routes.quiz_page_path(@conn, :view_ranking, 2) %>
+      <%= link "Level 3", to: Routes.quiz_page_path(@conn, :view_ranking, 3) %>
+      <%= link "Winners", to: Routes.quiz_page_path(@conn, :view_ranking, 4) %>
+    </div>
+
+    <%= if @accounts == [] do %>
+    <br>
+    <br>
+    <br>
+    <p align="center">No Records Available Yet.</p>
+    <% else %>
+    <%= for account <- @accounts do %>
+	<div class="quiz-ranking-account-container">
+	  <img src="/images/gqs-user.png"/>
+	  <div class="quiz-ranking-account-details">
+	    <p class="quiz-ranking-account-name"><%= account.user.username %></p>
+	    <p class="quiz-ranking-account-points">Points: <%= account.current_score %></p>
+	  </div>
+	</div>
+	<% end %>
+	
+    <% end %>
+
+  </div>
+</div>
+

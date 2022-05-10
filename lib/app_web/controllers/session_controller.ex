@@ -29,10 +29,17 @@ defmodule AppWeb.SessionController do
     else
       case User.get_school_id_and_password(school_id, password) do
         %App.Schema.User{} = user ->
-	  conn
-	  |> put_session(:user_id, user.id)
-	  |> configure_session(renew: true)
-	  |> redirect(to: Routes.user_page_path(conn, :show, user.id))
+	  if user.role == "user" do
+	    conn
+	    |> put_session(:user_id, user.id)
+	    |> configure_session(renew: true)
+	    |> redirect(to: Routes.user_page_path(conn, :show, user.id))
+	  else
+	    conn
+	    |> put_session(:user_id, user.id)
+	    |> configure_session(renew: true)
+	    |> redirect(to: Routes.quiz_page_path(conn, :view_ranking, 1))
+	  end
 	nil ->
 	  conn
 	  |> put_flash(:error, "School Id and password combination cannot be found!")

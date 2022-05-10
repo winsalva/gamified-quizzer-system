@@ -13,6 +13,15 @@ defmodule App.Query.User do
     |> Repo.delete()
   end
 
+  def list_winners do
+    query =
+      from u in User,
+        where: u.current_score >= 1000000,
+	order_by: [desc: :current_score]
+
+    Repo.all(query)
+  end
+
   @doc """
   Reset user records.
   """

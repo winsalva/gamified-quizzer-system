@@ -12,10 +12,14 @@
   <div>
   <div id="menu-options">
     <%= link "Home", to: Routes.page_path(@conn, :index) %>
-    <%= if @conn.assigns.current_user do %>
+    <%= cond do %>
+    <% @conn.assigns.current_user && @conn.assigns.current_user.role == "user" -> %>
     <%= link "My Account", to: Routes.user_page_path(@conn, :show, @conn.assigns.current_user.id) %>
     <%= link "Log Out", to: Routes.session_path(@conn, :delete), method: :delete, data: [confirm: "Are you sure?"] %>
-    <% else %>
+    <% @conn.assigns.current_user && @conn.assigns.current_user.role == "admin" -> %>
+    <%= link "My Account", to: Routes.quiz_page_path(@conn, :view_ranking, 1) %>
+    <%= link "Log Out", to: Routes.session_path(@conn, :delete), method: :delete, data: [confirm: "Are you sure?"] %>
+    <% true -> %>
     <%= link "Log In", to: Routes.session_path(@conn, :new) %> 
     <%= link "Register Account", to: Routes.user_page_path(@conn, :new) %>
     <% end %>
@@ -44,28 +48,29 @@
     </div>
 
     <h2><b>Fun</b></h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+    <p>Being part of a trivia team or even participating as a solo player provides some good social effects, too. The fun of knowing the right answer, cheering on the winners, consoling those who are not winning, and just being a part of a big trivia game has a positive impact.</p>
 
     <div class="gqs-img-container">
       <img src="/images/gqs-4.jpeg"/>
     </div>
 
     <h2><b>Competitive</b></h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+    <p>Quiz competitions, it is probable time to encourage your child to participate in quiz competitions or spelling bees. If you wish your child to develop and improve their skills, that will give them an edge over their competitors.</p>
 
     <div class="gqs-img-container">
       <img src="/images/gqs-2.png"/>
     </div>
 
     <h2><b>Engaging</b></h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+    <p>Quiz competitions enables students to think from different angles or simply ‘to think out of the box’
+It promotes a healthy debate amongst participants in order to learn from each other</p>
 
     <div class="gqs-img-container">
       <img src="/images/gqs-3.png"/>
     </div>
 
     <h2><b>Educative</b></h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+    <p>Trivia seems to have the power to unlock the potential of the human mind. Companies have been using trivia games for years to improve mental performance and enhance creativity. Playing trivia games supports cognitive and brain development. It could also expand decision-making capabilities.</p>
 
   </div>
 </div>
